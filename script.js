@@ -1,107 +1,164 @@
-//Press a button to choose your path
-//See the README file for more information
 
 /* VARIABLES */
-let enterButton;
-let a1Button;
-let a2Button;
-let b1Button;
-let b2Button;
-let screen = 0;
-let respect = 100;
-let motivation = 100; 
-let knowledge = 100;
-
-/* SETUP RUNS ONCE */
-function setup() {
-  createCanvas(750, 700);
-  textAlign(CENTER, CENTER);
-  textSize(20);
-  noStroke();
+let enterButton, a1Button, a2Button, b1Button, b2Button;
+let screen = 0, respect = 100, motivation = 100, knowledge = 100;
 
 /* SETUP RUNS ONCE */
 function setup() {
   createCanvas(600, 400);
-  textAlign(CENTER);
-  textSize(20);
-  noStroke();
+  textAlign(CENTER, CENTER);
+  textSize(18);
 
-  // Set up the home screen - Screen 0: Splash Screen
-    fill("black");
-    textSize(30); // Font size increased
-    textStyle(BOLD); // Made the font thicker
-    text("Khalil's Journey", width / 2, height / 2 - 80);
-    textSize(20);
-    textStyle(NORMAL);
-    fill(255);
-    text("An interactive story about hustle, pressure,\nchoices and making it out the mud.", width / 2, height / 2 - 40);
+  // Buttons
+  enterButton = new Sprite(width / 2, height / 2 + 60);
+  a1Button = new Sprite(-100, -100);
+  a2Button = new Sprite(-100, -100);
+  b1Button = new Sprite(-100, -100);
+  b2Button = new Sprite(-100, -100);
 
-  
-
-
-    // Create buttons for all screens
-     enterButton = new Sprite(width / 2, height / 2 + 60, 200, 50);
-      enterButton.text = "Begin Journey";
-      enterButton.collider = "k";
-      enterButton.color = "purple";
-      enterButton.textColor = "white";
-
-      // These will be moved into place when needed
-      a1Button = new Sprite(-999, -999, 200, 45);
-      a2Button = new Sprite(-999, -999, 200, 45);
-      b1Button = new Sprite(-999, -999, 200, 45);
-      b2Button = new Sprite(-999, -999, 200, 45);
-
-      a1Button.collider = "k";
-      a2Button.collider = "k";
-      b1Button.collider = "k";
-      b2Button.collider = "k";
-    }
-
-  /* DRAW LOOP REPEATS */
-  function draw() {
-    // Display start button
-    enterButton.w = 175;
-    enterButton.h = 65;
-    enterButton.collider = "k";
-    enterButton.color = "purple";
-    enterButton.text = "Begin Adventure";
-
-    // Check enter button
-    if (enterButton.mouse.presses()) {
-      print("pressed");
-      showScreen1();
-      screen = 1;
-    }
-
-    if (screen == 1) {
-      if(a1Button.mouse.presses()){
-        print("Display screen 2");
-        showScreen2();
-        screen = 2;
-      } else if(a2Button.mouse.presses()){
-        print("Display screen 5");
-        showScreen5();
-        screen = 5;
-      }
-    }
-
-    if (screen == 2) {
-      if(b1Button.mouse.presses()){
-        print("Display screen 3");
-        showScreen3();
-        screen = 3;
-      } else if(b2Button.mouse.presses()){
-        print("Display screen 4");
-        showScreen4();
-        screen = 4;
-      }
-    }
-
-    print(screen);
-  }
-
-
+  enterButton.w = 200;
+  enterButton.h = 50;
+  enterButton.text = "Begin Journey";
+  enterButton.collider = "k";
 }
 
-/* FUNCTIONS TO DISPLAY SCREENS */
+/* DRAW LOOP */
+function draw() {
+  background(30);
+
+  if (screen == 0) {
+    fill(255);
+    textSize(28);
+    text("Khalil's Journey", width / 2, height / 2 - 100);
+    textSize(16);
+    text("An interactive story about choices...", width / 2, height / 2 - 60);
+
+    if (enterButton.mouse.presses()) {
+      screen = 1;
+      showScreen1();
+    }
+  }
+
+  if (screen == 1) {
+    if (a1Button.mouse.presses()) {
+      screen = 2;
+      showScreen2();
+    }
+    if (a2Button.mouse.presses()) {
+      screen = 5;
+      showScreen5();
+    }
+  }
+
+  if (screen == 2) {
+    if (b1Button.mouse.presses()) {
+      motivation += 10;
+      knowledge += 10;
+      screen = 3;
+      showScreen3();
+    }
+    if (b2Button.mouse.presses()) {
+      motivation -= 10;
+      knowledge -= 10;
+      screen = 4;
+      showScreen4();
+    }
+  }
+
+  drawHUD();
+}
+
+/* SCREEN FUNCTIONS */
+function showScreen1() {
+  clearButtons();
+  background(30);
+  fill(255);
+  text("Khalil wakes up. Go to school or hit the streets?", width / 2, height / 2 - 40);
+
+  a1Button.pos = { x: width / 2, y: height / 2 + 20 };
+  a1Button.w = 200;
+  a1Button.h = 40;
+  a1Button.text = "Go to School";
+  a1Button.collider = "k";
+
+  a2Button.pos = { x: width / 2, y: height / 2 + 80 };
+  a2Button.w = 200;
+  a2Button.h = 40;
+  a2Button.text = "Hit the Streets";
+  a2Button.collider = "k";
+}
+
+function showScreen2() {
+  clearButtons();
+  background(30);
+  fill(255);
+  text("A friend invites Khalil to a party tonight.", width / 2, height / 2 - 40);
+  text("What should he do?", width / 2, height / 2);
+
+  b1Button.pos = { x: width / 2, y: height / 2 + 40 };
+  b1Button.w = 200;
+  b1Button.h = 40;
+  b1Button.text = "Say no and study";
+  b1Button.collider = "k";
+
+  b2Button.pos = { x: width / 2, y: height / 2 + 100 };
+  b2Button.w = 200;
+  b2Button.h = 40;
+  b2Button.text = "Go to the party";
+  b2Button.collider = "k";
+}
+
+function showScreen3() {
+  clearButtons();
+  background(20, 120, 20);
+  fill(255);
+  text("Khalil stays home and studies. He levels up!", width / 2, height / 2);
+  text("Press R to restart", width / 2, height / 2 + 40);
+}
+
+function showScreen4() {
+  clearButtons();
+  background(150, 50, 50);
+  fill(255);
+  text("Khalil parties too hard. Grades suffer.", width / 2, height / 2);
+  text("Press R to restart", width / 2, height / 2 + 40);
+}
+
+function showScreen5() {
+  clearButtons();
+  background(100, 0, 0);
+  fill(255);
+  text("Khalil hits the streets. Trouble finds him fast.", width / 2, height / 2);
+  text("Press R to restart", width / 2, height / 2 + 40);
+}
+
+/* UTIL */
+function clearButtons() {
+  enterButton.pos = { x: -999, y: -999 };
+  a1Button.pos = { x: -999, y: -999 };
+  a2Button.pos = { x: -999, y: -999 };
+  b1Button.pos = { x: -999, y: -999 };
+  b2Button.pos = { x: -999, y: -999 };
+}
+
+function drawHUD() {
+  fill(255);
+  textAlign(LEFT, CENTER);
+  textSize(12);
+  text(`Respect: ${respect}`, 10, height - 60);
+  text(`Motivation: ${motivation}`, 10, height - 40);
+  text(`Knowledge: ${knowledge}`, 10, height - 20);
+}
+
+/* RESTART */
+function keyPressed() {
+  if (key === 'R' || key === 'r') {
+    screen = 0;
+    respect = 100;
+    motivation = 100;
+    knowledge = 100;
+
+    clearButtons();
+    enterButton.pos = { x: width / 2, y: height / 2 + 60 };
+  }
+}
