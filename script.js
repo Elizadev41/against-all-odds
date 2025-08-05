@@ -45,23 +45,24 @@ function draw() {
     case 1: showMeetKhalil(); break;
     case 2: showMomsCall(); break;
     case 3: showDebateOffer(); break;
-    case 4: showFriendsCheckIn(); break;
-    case 5: showStreetOffer(); break;
-    case 6: showJamalPartyInvite(); break;
-    case 7: showDebateTryouts(); break;
-    case 8: showDebateVsWork(); break;
-    case 9: showSchoolStress(); break;
-    case 10: showFamilyHomeworkNight(); break;
-    case 11: showCustomerIncident(); break;
-    case 12: showLetterFromDad(); break;
-    case 13: showScholarshipInterview(); break;
-    case 14: showFamilyEmergency(); break;
-    case 15: showJamalConfrontation(); break;
-    case 16: showDadCourtHearing(); break;
-    case 17: showFinalDebateTournament(); break;
-    case 18: showProgramResults(); break;
-    case 19: showOneYearLater(); break;
-    case 20: showFinalEnding(); break;
+    case 4: showDebateOutcome(); break;
+    case 5: showFriendsCheckIn(); break;
+    case 6: showStreetOffer(); break;
+    case 7: showJamalPartyInvite(); break;
+    case 8: showDebateTryouts(); break;
+    case 9: showDebateVsWork(); break;
+    case 10: showSchoolStress(); break;
+    case 11: showFamilyHomeworkNight(); break;
+    case 12: showCustomerIncident(); break;
+    case 13: showLetterFromDad(); break;
+    case 14: showScholarshipInterview(); break;
+    case 15: showFamilyEmergency(); break;
+    case 16: showJamalConfrontation(); break;
+    case 17: showDadCourtHearing(); break;
+    case 18: showFinalDebateTournament(); break;
+    case 19: showProgramResults(); break;
+    case 20: showOneYearLater(); break;
+    case 21: showFinalEnding(); break;
   }
 
   drawHUD();
@@ -112,6 +113,63 @@ function showDebateOffer() {
   ]);
   
   setupChoice("Yes, sign up", "No, focus on work/family", "Try to do both");
+}
+
+function showDebateOutcome() {
+  let choice = playerChoices[3];
+  
+  if (choice === 'A') {
+    displayStoryText([
+      "Khalil begins researching topics and preparing speeches.",
+      "His mom beams with pride when he tells her.",
+      "",
+      "Gains +Knowledge, opens path to scholarship, confidence boost."
+    ]);
+    knowledge += 15;
+    confidence += 10;
+    currentQuote = "\"Reality is wrong. Dreams are for real.\" — Tupac";
+  } else if (choice === 'B') {
+    displayStoryText([
+      "Khalil doubles down on work and caregiving.",
+      "He misses an opportunity but strengthens his bond with his siblings.",
+      "",
+      "Gains +Respect for family commitment, but closes debate path."
+    ]);
+    respect += 15;
+    currentQuote = "\"The biggest risk is not taking one.\" — Nipsey Hussle";
+  } else {
+    displayStoryText([
+      "Khalil tries to prep for debate while working shifts.",
+      "Sleep-deprived and stressed, he struggles to keep up.",
+      "",
+      "50/50 chance to balance both..."
+    ]);
+    
+    if (random() > 0.5) {
+      displayStoryText([
+        "Khalil tries to prep for debate while working shifts.",
+        "Sleep-deprived and stressed, he struggles to keep up.",
+        "",
+        "SUCCESS! Gains +Knowledge and +Money."
+      ]);
+      knowledge += 10;
+      money += 10;
+    } else {
+      displayStoryText([
+        "Khalil tries to prep for debate while working shifts.",
+        "Sleep-deprived and stressed, he struggles to keep up.",
+        "",
+        "FAILED! Loses both opportunities."
+      ]);
+      knowledge -= 10;
+      money -= 5;
+    }
+    currentQuote = "\"Success is my only option, failure's not.\" — Eminem";
+  }
+  
+  capStats();
+  positionButton(enterButton, width/2, height - 80);
+  enterButton.text = "Continue";
 }
 
 function showFriendsCheckIn() {
@@ -439,23 +497,10 @@ function handleChoice(choice) {
   
   // Apply stat changes based on screen and choice
   switch(screen) {
-    case 3: // Debate Offer
-      if (choice === 'A') { 
-        knowledge += 10; confidence += 5;
-        currentQuote = "\"Reality is wrong. Dreams are for real.\" — Tupac";
-      }
-      else if (choice === 'B') { 
-        respect += 10; money += 5;
-        currentQuote = "\"The biggest risk is not taking one.\" — Nipsey Hussle";
-      }
-      else { 
-        if (random() > 0.5) { knowledge += 5; money += 5; }
-        else { knowledge -= 5; money -= 5; }
-        currentQuote = "\"Success is my only option, failure's not.\" — Eminem";
-      }
+    case 3: // Debate Offer - just store choice, outcome handled in next screen
       break;
       
-    case 5: // Street Offer
+    case 6: // Street Offer
       if (choice === 'A') {
         respect += 10; mentalStrength += 5;
         currentQuote = "\"I'd rather lose a leg than my integrity.\" — Logic";
@@ -469,7 +514,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 6: // Jamal's Party
+    case 7: // Jamal's Party
       if (choice === 'A') {
         knowledge += 10;
         currentQuote = "\"Champions are made when no one is watching.\" — Kobe Bryant";
@@ -483,7 +528,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 8: // Debate vs Work
+    case 9: // Debate vs Work
       if (choice === 'A') { 
         money += 15;
         currentQuote = "\"Sometimes you gotta take the L to feed the fam.\" — Meek Mill";
@@ -499,7 +544,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 9: // School Stress
+    case 10: // School Stress
       if (choice === 'A') {
         knowledge += 15; mentalStrength -= 5;
         currentQuote = "\"Work until your idols become your rivals.\" — Drake";
@@ -514,7 +559,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 10: // Family Homework Night
+    case 11: // Family Homework Night
       if (choice === 'A') {
         respect += 15;
         currentQuote = "\"Family over everything.\" — Lil Durk";
@@ -529,7 +574,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 11: // Customer Incident
+    case 12: // Customer Incident
       if (choice === 'A') {
         respect += 15;
         currentQuote = "\"Class is knowing what to say, when not to say it.\" — Beyoncé";
@@ -544,7 +589,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 13: // Scholarship Interview
+    case 14: // Scholarship Interview
       if (choice === 'A') {
         if (knowledge >= 70) { confidence += 20; }
         else { confidence -= 10; }
@@ -561,7 +606,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 14: // Family Emergency
+    case 15: // Family Emergency
       if (choice === 'A') {
         respect += 15; knowledge -= 10;
         currentQuote = "\"Family first, always.\" — Vin Diesel";
@@ -576,7 +621,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 15: // Jamal Confrontation
+    case 16: // Jamal Confrontation
       if (choice === 'A') {
         respect += 10;
         currentQuote = "\"Real friends understand your growth.\" — Unknown";
@@ -590,7 +635,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 16: // Dad's Court Hearing
+    case 17: // Dad's Court Hearing
       if (choice === 'A') { 
         respect += 20; confidence += 15;
         currentQuote = "\"Stand up for what you believe in.\" — Unknown";
@@ -604,7 +649,7 @@ function handleChoice(choice) {
       }
       break;
       
-    case 17: // Final Debate Tournament
+    case 18: // Final Debate Tournament
       if (choice === 'A') {
         knowledge += 20; confidence += 15;
         currentQuote = "\"Logic will get you from A to B. Imagination will take you everywhere.\" — Einstein";
