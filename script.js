@@ -83,7 +83,7 @@ function showTitleScreen() {
 
 function showMeetKhalil() {
   displayStoryText([
-    "Meet KHALIL — 17, high school senior.",
+    "Meet KHALIL he's 17, high school senior.",
     "Dad's in jail. Mom works double shifts.",
     "He's raising his siblings: Kya (13), King & Kayson (5).",
     "Works nights at a diner. Dreams of law school."
