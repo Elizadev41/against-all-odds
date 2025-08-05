@@ -5,6 +5,7 @@ let enterButton, choiceA, choiceB, choiceC;
 let screen = 0;
 let respect = 50, knowledge = 50, money = 50, confidence = 50;
 let playerChoices = {}; // Track player decisions
+let currentQuote = ""; // Store current motivational quote
 
 /* SETUP RUNS ONCE */
 function setup() {
@@ -359,6 +360,15 @@ function displayStoryText(lines) {
   for (let i = 0; i < lines.length; i++) {
     text(lines[i], width/2, startY + (i * 25));
   }
+  
+  // Display quote if there is one
+  if (currentQuote !== "") {
+    fill(255, 215, 0); // Gold color for quotes
+    textSize(14);
+    text(currentQuote, width/2, height - 200);
+    fill(255); // Reset to white
+    textSize(18);
+  }
 }
 
 function setupChoice(textA, textB, textC) {
@@ -401,44 +411,182 @@ function handleButtonClicks() {
   }
 }
 
+function getQuoteForChoice(choiceQuality) {
+  let quotes = {
+    good: [
+      "\"You gotta make a change. It's time for us as a people to start makin' some changes.\" - Tupac",
+      "\"Success is my only option, failure's not.\" - Eminem", 
+      "\"The future belongs to those who prepare for it today.\" - Malcolm X",
+      "\"I'm just a kid from Akron. If I can do it, anybody can.\" - LeBron"
+    ],
+    okay: [
+      "\"Everything negative — pressure, challenges — is all an opportunity for me to rise.\" - Kobe",
+      "\"If you don't stand for something, you'll fall for anything.\" - Malcolm X",
+      "\"You can make something of your life. It just depends on your drive.\" - Eminem"
+    ],
+    bad: [
+      "\"They got money for wars but can't feed the poor.\" - Tupac",
+      "\"You're not to be so blind with patriotism that you can't face reality.\" - Malcolm X", 
+      "\"Don't let them say you ain't beautiful... just stay true to you.\" - Eminem",
+      "\"We talkin' 'bout practice!\" - AI (Allen Iverson)"
+    ]
+  };
+  
+  let selectedQuotes = quotes[choiceQuality];
+  return selectedQuotes[Math.floor(Math.random() * selectedQuotes.length)];
+}
+
 function handleChoice(choice) {
   playerChoices[screen] = choice;
+  currentQuote = ""; // Reset quote
   
   // Apply stat changes based on screen and choice
   switch(screen) {
     case 4: // Late night call
-      if (choice === 'A') { respect += 5; money += 10; }
-      else if (choice === 'B') { knowledge += 10; money -= 5; }
+      if (choice === 'A') { 
+        respect += 5; money += 10;
+        currentQuote = getQuoteForChoice('okay');
+      }
+      else if (choice === 'B') { 
+        knowledge += 10; money -= 5;
+        currentQuote = getQuoteForChoice('good');
+      }
       else { 
         if (random() > 0.5) { knowledge += 5; money += 5; }
         else { knowledge -= 5; money -= 5; }
+        currentQuote = getQuoteForChoice('okay');
       }
       break;
       
     case 5: // Jamal's party
-      if (choice === 'A') knowledge += 10;
-      else if (choice === 'B') respect -= 10;
+      if (choice === 'A') {
+        knowledge += 10;
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        respect -= 10;
+        currentQuote = getQuoteForChoice('bad');
+      }
+      else {
+        currentQuote = getQuoteForChoice('okay');
+      }
       break;
       
     case 7: // Missing homework
-      if (choice === 'A') { respect += 5; knowledge -= 5; }
-      else if (choice === 'C') money -= 5;
+      if (choice === 'A') { 
+        respect += 5; knowledge -= 5;
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('bad');
+      }
+      else if (choice === 'C') {
+        money -= 5;
+        currentQuote = getQuoteForChoice('okay');
+      }
       break;
       
     case 8: // Customer incident
-      if (choice === 'A') respect += 10;
-      else if (choice === 'B') { respect -= 5; confidence += 5; }
-      else if (choice === 'C') { money -= 10; confidence += 10; }
+      if (choice === 'A') {
+        respect += 10;
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') { 
+        respect -= 5; confidence += 5;
+        currentQuote = getQuoteForChoice('bad');
+      }
+      else if (choice === 'C') { 
+        money -= 10; confidence += 10;
+        currentQuote = getQuoteForChoice('bad');
+      }
       break;
       
     case 10: // Classmate offer
-      if (choice === 'A') respect += 10;
-      else if (choice === 'B') { money += 20; respect -= 15; }
+      if (choice === 'A') {
+        respect += 10;
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') { 
+        money += 20; respect -= 15;
+        currentQuote = getQuoteForChoice('bad');
+      }
+      else {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      break;
+      
+    case 11: // Teacher recommendation
+      if (choice === 'A') {
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('bad');
+      }
+      else {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      break;
+      
+    case 12: // Family emergency
+      if (choice === 'A') {
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      else {
+        currentQuote = getQuoteForChoice('good');
+      }
+      break;
+      
+    case 13: // Interview
+      if (choice === 'A') {
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('good');
+      }
+      else {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      break;
+      
+    case 14: // Jamal again
+      if (choice === 'A') {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('bad');
+      }
+      else {
+        currentQuote = getQuoteForChoice('okay');
+      }
       break;
       
     case 15: // Court hearing
-      if (choice === 'A') { respect += 15; confidence += 10; }
-      else if (choice === 'C') { respect -= 10; }
+      if (choice === 'A') { 
+        respect += 15; confidence += 10;
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      else if (choice === 'C') { 
+        respect -= 10;
+        currentQuote = getQuoteForChoice('bad');
+      }
+      break;
+      
+    case 16: // Final debate
+      if (choice === 'A') {
+        currentQuote = getQuoteForChoice('good');
+      }
+      else if (choice === 'B') {
+        currentQuote = getQuoteForChoice('okay');
+      }
+      else {
+        currentQuote = getQuoteForChoice('bad');
+      }
       break;
   }
   
@@ -474,6 +622,7 @@ function keyPressed() {
     money = 50;
     confidence = 50;
     playerChoices = {};
+    currentQuote = "";
     clearButtons();
     positionButton(enterButton, width/2, height/2 + 40);
     enterButton.text = "Begin Story";
