@@ -165,6 +165,12 @@ function showFirstDebate() {
     money += 10;
   }
   
+  // Cap stats
+  respect = Math.max(0, Math.min(100, respect));
+  knowledge = Math.max(0, Math.min(100, knowledge));
+  money = Math.max(0, Math.min(100, money));
+  confidence = Math.max(0, Math.min(100, confidence));
+  
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
@@ -202,6 +208,13 @@ function showDadLetter() {
   ]);
   
   confidence += 5;
+  
+  // Cap stats
+  respect = Math.max(0, Math.min(100, respect));
+  knowledge = Math.max(0, Math.min(100, knowledge));
+  money = Math.max(0, Math.min(100, money));
+  confidence = Math.max(0, Math.min(100, confidence));
+  
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
@@ -428,6 +441,12 @@ function handleChoice(choice) {
       else if (choice === 'C') { respect -= 10; }
       break;
   }
+  
+  // Cap all stats between 0 and 100
+  respect = Math.max(0, Math.min(100, respect));
+  knowledge = Math.max(0, Math.min(100, knowledge));
+  money = Math.max(0, Math.min(100, money));
+  confidence = Math.max(0, Math.min(100, confidence));
   
   clearButtons();
   screen++;
