@@ -1,0 +1,278 @@
+Let’s gooo, Lizzy 💥 You're building a full-on **interactive CYOA banger** with *Against All Odds* — and I got your back, scene by scene. Below is the full **story outline for screens 1–20**, with **narration, choice points, and all the decision options** laid out. You can copy/paste straight into your project and code it up however you like.
+
+---
+
+## 🎮 **AGAINST ALL ODDS – FULL STORY STRUCTURE**
+
+---
+
+### **SCREEN 1 – Title Screen**
+
+**Text:**
+**AGAINST ALL ODDS**
+Press **Begin Story** to start Khalil’s journey.
+
+---
+
+### **SCREEN 2 – Meet Khalil**
+
+**Narration:**
+Meet **Khalil** — 17, smart, underestimated, raised in the hood.
+Dad’s in prison for a crime he didn’t commit.
+Mom’s holding it down with three younger siblings: **Kya (13), King and Kayson (5-year-old twins)**.
+Khalil works nights at a local diner to help out — but his dream?
+**Law school.**
+People laugh when he says it, but he’s not backing down.
+
+---
+
+### **SCREEN 3 – The Debate Team Offer**
+
+**Narration:**
+Khalil’s in class, zoning out when the teacher calls on him.
+He answers flawlessly.
+“Why don’t you try out for the debate team?” the teacher says. “Tryouts are Tuesday after school.”
+He shrugs, unsure.
+
+---
+
+### **SCREEN 4 – Talk with Family**
+
+**Narration:**
+That night, Khalil tells his mom.
+She’s proud — tears in her eyes.
+He visits his dad and shares the news.
+“Take it,” his dad says. “You were born for this.”
+
+---
+
+### **SCREEN 5 – Late-Night Call**
+
+**Narration:**
+10:03 PM.
+Khalil’s boss calls:
+“Hey Khalil, can you take a shift Tuesday? Someone called in sick.”
+Debate tryouts or shift?
+
+**Choices:**
+
+* **Go to work** (gain Respect, lose Knowledge)
+* **Go to debate** (gain Knowledge, lose Money)
+* **Try to do both** (risky — 50/50 shot: gain both or fail both)
+
+---
+
+### **SCREEN 6 – Jamal’s Party Invite**
+
+**Narration:**
+Monday after school, Khalil’s friend **Jamal** pulls up.
+“Yo, party tonight at 7! You in?”
+
+**Choices:**
+
+* **Say no, I gotta study** (gain Knowledge +10)
+* **Say yes, let’s go** (lose Respect -10)
+* **Make an excuse — baby sibling is sick** (no change)
+
+---
+
+### **SCREEN 7 – First Debate Day**
+
+**Narration:**
+If Khalil chose debate, he’s standing in front of a small crowd.
+His palms sweat.
+But then…
+He speaks.
+Clear. Confident. Bold.
+Applause.
+
+**Automatic boost:**
+
+* Knowledge
+* Confidence
+
+---
+
+### **SCREEN 8 – Missing Homework**
+
+**Narration:**
+Next day, teacher says, “Where’s your paper?”
+Khalil forgot.
+He stayed up babysitting.
+He can explain or take the L.
+
+**Choices:**
+
+* **Be honest — I forgot** (gain Respect, lose Knowledge)
+* **Make up a lie** (no penalty, but lowers trust for future scenes)
+* **Beg for more time** (chance to resubmit, but boss cuts a shift)
+
+---
+
+### **SCREEN 9 – The Customer Incident**
+
+**Narration:**
+At the diner, a customer talks reckless.
+“You people are all the same.”
+Khalil feels heated.
+His boss watches silently.
+
+**Choices:**
+
+* **Keep calm, finish the shift** (gain Respect)
+* **Clap back** (lose Respect, gain Mental Strength)
+* **Walk out** (lose Money, boost confidence)
+
+---
+
+### **SCREEN 10 – A Letter from His Dad**
+
+**Narration:**
+A letter arrives from prison.
+His dad shares a quote:
+*"They told me I’d never make it. So I had to."*
+Khalil pins it on his wall.
+(+ Mental Strength)
+
+---
+
+### **SCREEN 11 – A Classmate’s Offer**
+
+**Narration:**
+At school, a known plug offers Khalil money to “drop off a package.”
+“No risk, easy cash.”
+
+**Choices:**
+
+* **Say no, I’m not risking it** (gain Respect)
+* **Say yes** (quick Money boost, but future scene risk)
+* **Walk away silently** (neutral)
+
+---
+
+### **SCREEN 12 – A Teacher’s Recommendation**
+
+**Narration:**
+Khalil’s teacher says she wants to recommend him for a pre-law summer program.
+He needs references, an essay, and… time.
+
+**Choices:**
+
+* **Go for it full force** (requires high Knowledge to succeed)
+* **Turn it down — too much right now**
+* **Say yes, but half-commit** (random chance of success/failure)
+
+---
+
+### **SCREEN 13 – Family Emergency**
+
+**Narration:**
+One twin has a fever.
+Mom has to work.
+Khalil has a midterm tomorrow.
+
+**Choices:**
+
+* **Stay home, skip the test** (gain Respect, lose Knowledge)
+* **Leave siblings with Kya** (risk — if Kya fails, you lose Respect)
+* **Call in backup (auntie/neighbor)** (safe, but uses a favor)
+
+---
+
+### **SCREEN 14 – The Interview**
+
+**Narration:**
+Khalil gets called in for a short scholarship interview.
+He’s nervous.
+
+**Question:**
+Why do you want to be a lawyer?
+
+**Player types or selects:**
+
+* “To fight for people like my dad.”
+* “Because I want to prove them wrong.”
+* “I want a better life.”
+
+Points shift based on choice — all valid, but affect tone of future scenes.
+
+---
+
+### **SCREEN 15 – Jamal Again**
+
+**Narration:**
+Jamal pulls up again:
+“Bro, you changing. You too good for us now?”
+Khalil has to respond.
+
+**Choices:**
+
+* **“I still ride for y’all, but I got goals.”** (gain Respect)
+* **“Man, I don’t need this.”** (gain Mental Strength)
+* **Say nothing.** (no change)
+
+---
+
+### **SCREEN 16 – Dad’s Court Hearing**
+
+**Narration:**
+Big day. Khalil has a chance to speak for his dad.
+Eyes on him.
+Will he?
+
+**Choices:**
+
+* **Speak boldly** (big Respect + Confidence)
+* **Let the lawyer handle it** (no change)
+* **Freeze up** (lose Respect, but opens future redemption path)
+
+---
+
+### **SCREEN 17 – Final Debate Tournament**
+
+**Narration:**
+Khalil’s team makes finals.
+He’s up against a private school kid who mocks his background.
+
+**Choices:**
+
+* **Stay cool, use logic** (win)
+* **Call him out, street-style** (points for realness, risk losing match)
+* **Fumble it** (still get a life lesson)
+
+---
+
+### **SCREEN 18 – Program Results**
+
+**Narration:**
+The email hits.
+Did he get the pre-law summer program?
+
+**If Knowledge + Respect are high → ACCEPTED.**
+**If low → REJECTED.**
+**If middle → WAITLISTED, but hope remains.**
+
+---
+
+### **SCREEN 19 – One Year Later**
+
+**Narration:**
+Khalil’s applying to college.
+No longer the busboy.
+Still the big brother.
+Still hungry.
+Still climbing.
+
+---
+
+### **SCREEN 20 – Final Message**
+
+**Narration:**
+*“They said I wouldn’t make it.”*
+*“But I’m not here to fit in. I’m here to build something bigger.”*
+🎓 You’ve reached one of Khalil’s endings.
+Play again to explore different paths.
+
+---
+
+If you want this in a Google Doc or copy-ready format, I can convert it and send you a downloadable version. Want help storyboarding or writing the code triggers for each screen? Just say the word. You’re building a classic. 🫡
