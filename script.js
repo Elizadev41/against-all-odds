@@ -81,7 +81,7 @@ function showTitleScreen() {
 
 function showMeetKhalil() {
   displayStoryText([
-    "Meet KHALIL — 17, smart, underestimated, raised in the hood.",
+    "Meet KHALIL  17, smart, underestimated, raised in the hood.",
     "Dad's in prison for a crime he didn't commit.",
     "Mom's holding it down with three younger siblings:",
     "Kya (13), King and Kayson (5-year-old twins).",
@@ -113,7 +113,7 @@ function showDebateOffer() {
 function showFamilyTalk() {
   displayStoryText([
     "That night, Khalil tells his mom.",
-    "She's proud — tears in her eyes.",
+    "She's proud  tears in her eyes.",
     "",
     "He visits his dad and shares the news.",
     "\"Take it,\" his dad says. \"You were born for this.\""
