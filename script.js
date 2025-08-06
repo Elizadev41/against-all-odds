@@ -1,4 +1,3 @@
-
 /* AGAINST ALL ODDS - Interactive Story */
 /* VARIABLES */
 let enterButton, choiceA, choiceB, choiceC;
@@ -38,7 +37,7 @@ function setupButton(button, txt, w, h) {
 /* DRAW LOOP */
 function draw() {
   background(20);
-  
+
   // Handle screen navigation
   switch(screen) {
     case 0: showTitleScreen(); break;
@@ -74,11 +73,11 @@ function showTitleScreen() {
   fill(255, 215, 0);
   textSize(48);
   text("AGAINST ALL ODDS", width/2, height/2 - 80);
-  
+
   fill(255);
   textSize(18);
   text("Press Begin Story to start Khalil's journey", width/2, height/2 - 20);
-  
+
   positionButton(enterButton, width/2, height/2 + 40);
 }
 
@@ -89,7 +88,7 @@ function showMeetKhalil() {
     "He's raising his siblings: Kya (13), King & Kayson (5).",
     "Works nights at a diner. Dreams of law school."
   ]);
-  
+
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
@@ -101,7 +100,7 @@ function showMomsCall() {
     "Diagnosis: cancer.",
     "Auntie steps in."
   ]);
-  
+
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
@@ -111,13 +110,13 @@ function showDebateOffer() {
     "Teacher invites Khalil to debate tryouts",
     "Friday after school."
   ]);
-  
+
   setupChoice("Yes, sign up", "No, focus on work/family", "Try to do both");
 }
 
 function showDebateOutcome() {
   let choice = playerChoices[3];
-  
+
   if (choice === 'A') {
     displayStoryText([
       "Khalil begins researching topics and preparing speeches.",
@@ -144,7 +143,7 @@ function showDebateOutcome() {
       "",
       "50/50 chance to balance both..."
     ]);
-    
+
     if (random() > 0.5) {
       displayStoryText([
         "Khalil tries to prep for debate while working shifts.",
@@ -166,7 +165,7 @@ function showDebateOutcome() {
     }
     currentQuote = "\"Success is my only option, failure's not.\" — Eminem";
   }
-  
+
   capStats();
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
@@ -175,10 +174,10 @@ function showDebateOutcome() {
 function showFriendsCheckIn() {
   displayStoryText([
     "Friends notice Khalil drifting.",
-    "He opens up about mom's illness.",
+    "He opens up about the family's financial stress.",
     "One friend offers risky 'help.'"
   ]);
-  
+
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
@@ -188,7 +187,7 @@ function showStreetOffer() {
     "A friend offers Khalil a quick money gig:",
     "drop-offs for a local dealer."
   ]);
-  
+
   setupChoice("Say NO", "Say YES", "Walk away silently");
 }
 
@@ -198,7 +197,7 @@ function showJamalPartyInvite() {
     "\"Yo, party at 7 on Friday.",
     "I'll pick you up. You coming?\""
   ]);
-  
+
   setupChoice("Say NO, study instead", "Say YES", "Make an excuse");
 }
 
@@ -222,7 +221,7 @@ function showDebateTryouts() {
     respect += 5;
     currentQuote = "\"The biggest risk is not taking one.\" — Nipsey Hussle";
   }
-  
+
   capStats();
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
@@ -233,7 +232,7 @@ function showDebateVsWork() {
     "Boss calls. Wants Khalil to cover shift",
     "same time as tryout."
   ]);
-  
+
   setupChoice("Work", "Debate", "Try both");
 }
 
@@ -242,7 +241,7 @@ function showSchoolStress() {
     "Homework late. Teacher not impressed.",
     "Khalil's slipping."
   ]);
-  
+
   setupChoice("Study extra hard", "Skip class to work", "Ask for help");
 }
 
@@ -251,7 +250,7 @@ function showFamilyHomeworkNight() {
     "Siblings need help.",
     "Your own test is tomorrow."
   ]);
-  
+
   setupChoice("Help siblings", "Focus on your work", "Split time evenly");
 }
 
@@ -260,7 +259,7 @@ function showCustomerIncident() {
     "Rude customer at the diner says:",
     "\"Figures someone like you would mess up.\""
   ]);
-  
+
   setupChoice("Stay calm", "Clap back", "Walk out");
 }
 
@@ -272,10 +271,10 @@ function showLetterFromDad() {
     "",
     "Khalil pins it on his wall."
   ]);
-  
+
   mentalStrength += 10;
   currentQuote = "\"They told me I'd never make it. So I had to.\" — Dad";
-  
+
   capStats();
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
@@ -286,7 +285,7 @@ function showScholarshipInterview() {
     "Teacher recommends Khalil",
     "for law program."
   ]);
-  
+
   setupChoice("Go full force", "Turn it down", "Half-commit");
 }
 
@@ -295,7 +294,7 @@ function showFamilyEmergency() {
     "One twin sick.",
     "Midterm tomorrow."
   ]);
-  
+
   setupChoice("Skip midterm, stay home", "Let Kya babysit", "Call aunt");
 }
 
@@ -304,7 +303,7 @@ function showJamalConfrontation() {
     "Jamal: \"You act brand new.",
     "You too good for us now?\""
   ]);
-  
+
   setupChoice("\"I still ride for y'all\"", "\"I don't need this\"", "Stay silent");
 }
 
@@ -312,7 +311,7 @@ function showDadCourtHearing() {
   displayStoryText([
     "Khalil can speak on dad's behalf."
   ]);
-  
+
   setupChoice("Speak boldly", "Let lawyer handle it", "Freeze");
 }
 
@@ -321,13 +320,13 @@ function showFinalDebateTournament() {
     "Rival mocks Khalil:",
     "\"You're just a statistic.\""
   ]);
-  
+
   setupChoice("Use logic and stay cool", "Clap back, street-style", "Freeze");
 }
 
 function showProgramResults() {
   let totalScore = knowledge + respect + confidence + mentalStrength;
-  
+
   if (totalScore >= 240) {
     displayStoryText([
       "Khalil checks his email.",
@@ -356,7 +355,7 @@ function showProgramResults() {
     ]);
     currentQuote = "\"Every setback is a setup for a comeback.\" — Unknown";
   }
-  
+
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
@@ -368,7 +367,7 @@ function showOneYearLater() {
     "Khalil's grinding. College apps sent.",
     "Job lined up. Still dreaming."
   ]);
-  
+
   currentQuote = "\"I'm not here to fit in. I'm here to break cycles.\" — Khalil";
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
@@ -376,7 +375,7 @@ function showOneYearLater() {
 
 function showFinalEnding() {
   let totalScore = knowledge + respect + confidence + mentalStrength;
-  
+
   if (totalScore >= 240) {
     displayStoryText([
       "ACADEMIC VICTORY",
@@ -412,11 +411,11 @@ function displayStoryText(lines) {
   fill(255);
   textSize(18);
   let startY = 80;
-  
+
   for (let i = 0; i < lines.length; i++) {
     text(lines[i], width/2, startY + (i * 25));
   }
-  
+
   // Display quote if there is one
   if (currentQuote !== "") {
     fill(255, 215, 0); // Gold color for quotes
@@ -431,7 +430,7 @@ function setupChoice(textA, textB, textC) {
   choiceA.text = textA;
   choiceB.text = textB;
   choiceC.text = textC;
-  
+
   positionButton(choiceA, width/2, height - 150);
   positionButton(choiceB, width/2, height - 100);
   positionButton(choiceC, width/2, height - 50);
@@ -453,15 +452,15 @@ function handleButtonClicks() {
     clearButtons();
     screen++;
   }
-  
+
   if (choiceA.mouse.presses()) {
     handleChoice('A');
   }
-  
+
   if (choiceB.mouse.presses()) {
     handleChoice('B');
   }
-  
+
   if (choiceC.mouse.presses()) {
     handleChoice('C');
   }
@@ -486,7 +485,7 @@ function getQuoteForChoice(choiceQuality) {
       "\"Sometimes you gotta take the L to feed the fam.\" — Meek Mill"
     ]
   };
-  
+
   let selectedQuotes = quotes[choiceQuality];
   return selectedQuotes[Math.floor(Math.random() * selectedQuotes.length)];
 }
@@ -494,12 +493,12 @@ function getQuoteForChoice(choiceQuality) {
 function handleChoice(choice) {
   playerChoices[screen] = choice;
   currentQuote = ""; // Reset quote
-  
+
   // Apply stat changes based on screen and choice
   switch(screen) {
     case 3: // Debate Offer - just store choice, outcome handled in next screen
       break;
-      
+
     case 6: // Street Offer
       if (choice === 'A') {
         respect += 10; mentalStrength += 5;
@@ -513,7 +512,7 @@ function handleChoice(choice) {
         currentQuote = "\"Sometimes silence speaks louder than words.\" — Unknown";
       }
       break;
-      
+
     case 7: // Jamal's Party
       if (choice === 'A') {
         knowledge += 10;
@@ -527,7 +526,7 @@ function handleChoice(choice) {
         currentQuote = "\"Honesty is a very expensive gift. Don't expect it from cheap people.\" — Warren Buffett";
       }
       break;
-      
+
     case 9: // Debate vs Work
       if (choice === 'A') { 
         money += 15;
@@ -543,7 +542,7 @@ function handleChoice(choice) {
         currentQuote = "\"You can't pour from an empty cup.\" — Unknown";
       }
       break;
-      
+
     case 10: // School Stress
       if (choice === 'A') {
         knowledge += 15; mentalStrength -= 5;
@@ -558,7 +557,7 @@ function handleChoice(choice) {
         currentQuote = "\"It takes a village to raise a child.\" — African Proverb";
       }
       break;
-      
+
     case 11: // Family Homework Night
       if (choice === 'A') {
         respect += 15;
@@ -573,7 +572,7 @@ function handleChoice(choice) {
         currentQuote = "\"Balance is not something you find, it's something you create.\" — Jana Kingsford";
       }
       break;
-      
+
     case 12: // Customer Incident
       if (choice === 'A') {
         respect += 15;
@@ -588,7 +587,7 @@ function handleChoice(choice) {
         currentQuote = "\"Know your worth. Then add tax.\" — Cardi B";
       }
       break;
-      
+
     case 14: // Scholarship Interview
       if (choice === 'A') {
         if (knowledge >= 70) { confidence += 20; }
@@ -605,7 +604,7 @@ function handleChoice(choice) {
         currentQuote = "\"You either go all in or get out.\" — Eminem";
       }
       break;
-      
+
     case 15: // Family Emergency
       if (choice === 'A') {
         respect += 15; knowledge -= 10;
@@ -620,7 +619,7 @@ function handleChoice(choice) {
         currentQuote = "\"It takes a village.\" — African Proverb";
       }
       break;
-      
+
     case 16: // Jamal Confrontation
       if (choice === 'A') {
         respect += 10;
@@ -634,7 +633,7 @@ function handleChoice(choice) {
         currentQuote = "\"Sometimes silence is the best response.\" — Unknown";
       }
       break;
-      
+
     case 17: // Dad's Court Hearing
       if (choice === 'A') { 
         respect += 20; confidence += 15;
@@ -648,7 +647,7 @@ function handleChoice(choice) {
         currentQuote = "\"Courage isn't the absence of fear, it's acting despite it.\" — Unknown";
       }
       break;
-      
+
     case 18: // Final Debate Tournament
       if (choice === 'A') {
         knowledge += 20; confidence += 15;
@@ -664,7 +663,7 @@ function handleChoice(choice) {
       }
       break;
   }
-  
+
   capStats();
   clearButtons();
   screen++;
@@ -682,13 +681,13 @@ function drawHUD() {
   fill(255);
   textAlign(LEFT, CENTER);
   textSize(12);
-  
+
   text(`Respect: ${respect}`, 20, 25);
   text(`Knowledge: ${knowledge}`, 20, 40);
   text(`Money: ${money}`, 20, 55);
   text(`Confidence: ${confidence}`, 20, 70);
   text(`Mental Strength: ${mentalStrength}`, 20, 85);
-  
+
   textAlign(CENTER, CENTER);
 }
 
