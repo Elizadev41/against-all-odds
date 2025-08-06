@@ -3,7 +3,7 @@
 /* VARIABLES */
 let enterButton, choiceA, choiceB, choiceC;
 let screen = 0;
-let respect = 0, knowledge = 0, money = 0, confidence = 0;
+let respect = 50, knowledge = 50, money = 50, confidence = 50;
 let playerChoices = {}; // Track player decisions
 
 /* SETUP RUNS ONCE */
@@ -59,7 +59,7 @@ function draw() {
     case 16: showFinalDebate(); break;
     case 17: showProgramResults(); break;
     case 18: showOneYearLater(); break;
-    case 19: showFinalMessage(); break;
+    case 19: showEnding(); break;
   }
 
   drawHUD();
@@ -336,6 +336,46 @@ function showOneYearLater() {
   
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
+}
+
+function showEnding() {
+  let totalScore = respect + knowledge + confidence;
+
+  clearButtons();
+  textSize(20);
+  fill(101, 67, 33);
+
+  if (totalScore >= 180) {
+    // Ending 1 – The Dream Achieved
+    displayStoryText([
+      "ENDING: THE DREAM ACHIEVED",
+      "Khalil became a world-known lawyer.",
+      "He launched an NGO and scholarship to lift others like him.",
+      "He didn't change who he was — he made the system see his worth.",
+      "\"I didn't change who I was to make it. I changed what making it looked like.\" – Jay-Z"
+    ]);
+  } else if (totalScore >= 140) {
+    // Ending 2 – The Community Protector
+    displayStoryText([
+      "ENDING: THE COMMUNITY PROTECTOR",
+      "Khalil skipped college, held down his family, and led change.",
+      "His dad got out. His siblings got better schools.",
+      "A lawyer passed him a firm. He passed the torch.",
+      "\"You ain't gotta leave the block to lead it.\" – Nipsey Hussle"
+    ]);
+  } else {
+    // Ending 3 – The Fallout
+    displayStoryText([
+      "ENDING: THE FALLOUT",
+      "Khalil missed his chances. He got lost in the noise.",
+      "No debate. No scholarship. No law school.",
+      "The street got him before the system could.",
+      "\"Dreams don't die. People just stop chasing.\" – Tupac"
+    ]);
+  }
+
+  positionButton(enterButton, width/2, height - 80);
+  enterButton.text = "Play Again";
 }
 
 function showFinalMessage() {
