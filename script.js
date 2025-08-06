@@ -3,7 +3,7 @@
 /* VARIABLES */
 let enterButton, choiceA, choiceB, choiceC;
 let screen = 0;
-let respect = 50, knowledge = 50, money = 50, confidence = 50;
+let respect = 0, knowledge = 0, money = 0, confidence = 0;
 let playerChoices = {}; // Track player decisions
 
 /* SETUP RUNS ONCE */
@@ -509,10 +509,10 @@ function keyPressed() {
   if (key === 'R' || key === 'r') {
     // Restart game
     screen = 0;
-    respect = 50;
-    knowledge = 50;
-    money = 50;
-    confidence = 50;
+    respect = 0;
+    knowledge = 0;
+    money = 0;
+    confidence = 0;
     playerChoices = {};
     clearButtons();
     positionButton(enterButton, width/2, height/2 + 40);
