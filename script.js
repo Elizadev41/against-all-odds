@@ -3,9 +3,8 @@
 /* VARIABLES */
 let enterButton, choiceA, choiceB, choiceC;
 let screen = 0;
-let respect = 50, knowledge = 50, money = 50, confidence = 50, mentalStrength = 50;
+let respect = 50, knowledge = 50, money = 50, confidence = 50;
 let playerChoices = {}; // Track player decisions
-let currentQuote = ""; // Store current motivational quote
 
 /* SETUP RUNS ONCE */
 function setup() {
@@ -43,26 +42,24 @@ function draw() {
   switch(screen) {
     case 0: showTitleScreen(); break;
     case 1: showMeetKhalil(); break;
-    case 2: showMomsCall(); break;
-    case 3: showDebateOffer(); break;
-    case 4: showDebateOutcome(); break;
-    case 5: showFriendsCheckIn(); break;
-    case 6: showStreetOffer(); break;
-    case 7: showJamalPartyInvite(); break;
-    case 8: showDebateTryouts(); break;
-    case 9: showDebateVsWork(); break;
-    case 10: showSchoolStress(); break;
-    case 11: showFamilyHomeworkNight(); break;
-    case 12: showCustomerIncident(); break;
-    case 13: showLetterFromDad(); break;
-    case 14: showScholarshipInterview(); break;
-    case 15: showFamilyEmergency(); break;
-    case 16: showJamalConfrontation(); break;
-    case 17: showDadCourtHearing(); break;
-    case 18: showFinalDebateTournament(); break;
-    case 19: showProgramResults(); break;
-    case 20: showOneYearLater(); break;
-    case 21: showFinalEnding(); break;
+    case 2: showDebateOffer(); break;
+    case 3: showFamilyTalk(); break;
+    case 4: showLateNightCall(); break;
+    case 5: showJamalParty(); break;
+    case 6: showFirstDebate(); break;
+    case 7: showMissingHomework(); break;
+    case 8: showCustomerIncident(); break;
+    case 9: showDadLetter(); break;
+    case 10: showClassmateOffer(); break;
+    case 11: showTeacherRecommendation(); break;
+    case 12: showFamilyEmergency(); break;
+    case 13: showInterview(); break;
+    case 14: showJamalAgain(); break;
+    case 15: showCourtHearing(); break;
+    case 16: showFinalDebate(); break;
+    case 17: showProgramResults(); break;
+    case 18: showOneYearLater(); break;
+    case 19: showFinalMessage(); break;
   }
 
   drawHUD();
@@ -77,29 +74,21 @@ function showTitleScreen() {
   
   fill(255);
   textSize(18);
-  text("Press Begin Story to start Khalil's journey", width/2, height/2 - 20);
+  text("An Interactive Story About Khalil's Journey", width/2, height/2 - 20);
   
   positionButton(enterButton, width/2, height/2 + 40);
 }
 
 function showMeetKhalil() {
   displayStoryText([
-    "Meet KHALIL he's 17, high school senior.",
-    "Dad's in jail. Mom works double shifts.",
-    "He's raising his siblings: Kya (13), King & Kayson (5).",
-    "Works nights at a diner. Dreams of law school."
-  ]);
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showMomsCall() {
-  displayStoryText([
-    "Khalil is pulled out of class.",
-    "His mom's in the hospital.",
-    "Diagnosis: cancer.",
-    "Auntie steps in."
+    "Meet KHALIL — 17, smart, underestimated, raised in the hood.",
+    "Dad's in prison for a crime he didn't commit.",
+    "Mom's holding it down with three younger siblings:",
+    "Kya (13), King and Kayson (5-year-old twins).",
+    "",
+    "Khalil works nights at a local diner to help out — but his dream?",
+    "LAW SCHOOL.",
+    "People laugh when he says it, but he's not backing down."
   ]);
   
   positionButton(enterButton, width/2, height - 80);
@@ -108,253 +97,226 @@ function showMomsCall() {
 
 function showDebateOffer() {
   displayStoryText([
-    "Teacher invites Khalil to debate tryouts",
-    "Friday after school."
-  ]);
-  
-  setupChoice("Yes, sign up", "No, focus on work/family", "Try to do both");
-}
-
-function showDebateOutcome() {
-  let choice = playerChoices[3];
-  
-  if (choice === 'A') {
-    displayStoryText([
-      "Khalil begins researching topics and preparing speeches.",
-      "His mom beams with pride when he tells her.",
-      "",
-      "Gains +Knowledge, opens path to scholarship, confidence boost."
-    ]);
-    knowledge += 15;
-    confidence += 10;
-    currentQuote = "\"Reality is wrong. Dreams are for real.\" — Tupac";
-  } else if (choice === 'B') {
-    displayStoryText([
-      "Khalil doubles down on work and caregiving.",
-      "He misses an opportunity but strengthens his bond with his siblings.",
-      "",
-      "Gains +Respect for family commitment, but closes debate path."
-    ]);
-    respect += 15;
-    currentQuote = "\"The biggest risk is not taking one.\" — Nipsey Hussle";
-  } else {
-    displayStoryText([
-      "Khalil tries to prep for debate while working shifts.",
-      "Sleep-deprived and stressed, he struggles to keep up.",
-      "",
-      "50/50 chance to balance both..."
-    ]);
-    
-    if (random() > 0.5) {
-      displayStoryText([
-        "Khalil tries to prep for debate while working shifts.",
-        "Sleep-deprived and stressed, he struggles to keep up.",
-        "",
-        "SUCCESS! Gains +Knowledge and +Money."
-      ]);
-      knowledge += 10;
-      money += 10;
-    } else {
-      displayStoryText([
-        "Khalil tries to prep for debate while working shifts.",
-        "Sleep-deprived and stressed, he struggles to keep up.",
-        "",
-        "FAILED! Loses both opportunities."
-      ]);
-      knowledge -= 10;
-      money -= 5;
-    }
-    currentQuote = "\"Success is my only option, failure's not.\" — Eminem";
-  }
-  
-  capStats();
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showFriendsCheckIn() {
-  displayStoryText([
-    "Friends notice Khalil drifting.",
-    "He opens up about mom's illness.",
-    "One friend offers risky 'help.'"
+    "Khalil's in class, zoning out when the teacher calls on him.",
+    "He answers flawlessly.",
+    "",
+    "\"Why don't you try out for the debate team?\"",
+    "the teacher says. \"Tryouts are Tuesday after school.\"",
+    "",
+    "He shrugs, unsure."
   ]);
   
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
 
-function showStreetOffer() {
+function showFamilyTalk() {
   displayStoryText([
-    "A friend offers Khalil a quick money gig:",
-    "drop-offs for a local dealer."
+    "That night, Khalil tells his mom.",
+    "She's proud — tears in her eyes.",
+    "",
+    "He visits his dad and shares the news.",
+    "\"Take it,\" his dad says. \"You were born for this.\""
   ]);
   
-  setupChoice("Say NO", "Say YES", "Walk away silently");
+  positionButton(enterButton, width/2, height - 80);
+  enterButton.text = "Continue";
 }
 
-function showJamalPartyInvite() {
+function showLateNightCall() {
   displayStoryText([
-    "Monday, Jamal pulls up:",
-    "\"Yo, party at 7 on Friday.",
-    "I'll pick you up. You coming?\""
+    "10:03 PM.",
+    "Khalil's boss calls:",
+    "\"Hey Khalil, can you take a shift Tuesday?",
+    "Someone called in sick.\"",
+    "",
+    "Debate tryouts or shift?"
   ]);
   
-  setupChoice("Say NO, study instead", "Say YES", "Make an excuse");
+  setupChoice("Go to work", "Go to debate", "Try to do both");
 }
 
-function showDebateTryouts() {
-  if (playerChoices[3] === 'A' || playerChoices[3] === 'C') {
+function showJamalParty() {
+  displayStoryText([
+    "Monday after school, Khalil's friend Jamal pulls up.",
+    "\"Yo, party tonight at 7! You in?\""
+  ]);
+  
+  setupChoice("Say no, I gotta study", "Say yes, let's go", "Make an excuse");
+}
+
+function showFirstDebate() {
+  if (playerChoices[4] === 'B' || playerChoices[4] === 'C') {
     displayStoryText([
-      "Khalil delivers a strong speech",
-      "on systemic injustice.",
-      "Applause follows.",
-      "Coach: \"You got something special.\""
+      "Khalil's standing in front of a small crowd.",
+      "His palms sweat.",
+      "But then... He speaks.",
+      "Clear. Confident. Bold.",
+      "Applause."
     ]);
-    confidence += 10;
     knowledge += 10;
-    currentQuote = "\"It ain't about how hard you hit. It's about how hard you can get hit and keep moving forward.\" — Rocky Balboa";
+    confidence += 10;
   } else {
     displayStoryText([
-      "Khalil focused on work and family instead.",
-      "He watches others from the sidelines.",
+      "Khalil had to work instead of trying out.",
+      "He watches from the sidelines as others debate.",
       "\"Maybe next time,\" he thinks."
     ]);
-    respect += 5;
-    currentQuote = "\"The biggest risk is not taking one.\" — Nipsey Hussle";
+    money += 10;
   }
   
-  capStats();
+  // Cap stats
+  respect = Math.max(0, Math.min(100, respect));
+  knowledge = Math.max(0, Math.min(100, knowledge));
+  money = Math.max(0, Math.min(100, money));
+  confidence = Math.max(0, Math.min(100, confidence));
+  
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
 
-function showDebateVsWork() {
+function showMissingHomework() {
   displayStoryText([
-    "Boss calls. Wants Khalil to cover shift",
-    "same time as tryout."
+    "Next day, teacher says, \"Where's your paper?\"",
+    "Khalil forgot. He stayed up babysitting.",
+    "He can explain or take the L."
   ]);
   
-  setupChoice("Work", "Debate", "Try both");
-}
-
-function showSchoolStress() {
-  displayStoryText([
-    "Homework late. Teacher not impressed.",
-    "Khalil's slipping."
-  ]);
-  
-  setupChoice("Study extra hard", "Skip class to work", "Ask for help");
-}
-
-function showFamilyHomeworkNight() {
-  displayStoryText([
-    "Siblings need help.",
-    "Your own test is tomorrow."
-  ]);
-  
-  setupChoice("Help siblings", "Focus on your work", "Split time evenly");
+  setupChoice("Be honest — I forgot", "Make up a lie", "Beg for more time");
 }
 
 function showCustomerIncident() {
   displayStoryText([
-    "Rude customer at the diner says:",
-    "\"Figures someone like you would mess up.\""
+    "At the diner, a customer talks reckless.",
+    "\"You people are all the same.\"",
+    "Khalil feels heated.",
+    "His boss watches silently."
   ]);
   
-  setupChoice("Stay calm", "Clap back", "Walk out");
+  setupChoice("Keep calm, finish shift", "Clap back", "Walk out");
 }
 
-function showLetterFromDad() {
+function showDadLetter() {
   displayStoryText([
-    "Letter arrives from prison.",
+    "A letter arrives from prison.",
+    "His dad shares a quote:",
+    "",
     "\"They told me I'd never make it.",
-    "So I had to.\" — Dad",
+    "So I had to.\"",
     "",
     "Khalil pins it on his wall."
   ]);
   
-  mentalStrength += 10;
-  currentQuote = "\"They told me I'd never make it. So I had to.\" — Dad";
+  confidence += 5;
   
-  capStats();
+  // Cap stats
+  respect = Math.max(0, Math.min(100, respect));
+  knowledge = Math.max(0, Math.min(100, knowledge));
+  money = Math.max(0, Math.min(100, money));
+  confidence = Math.max(0, Math.min(100, confidence));
+  
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
 
-function showScholarshipInterview() {
+function showClassmateOffer() {
   displayStoryText([
-    "Teacher recommends Khalil",
-    "for law program."
+    "At school, a known plug offers Khalil money",
+    "to \"drop off a package.\"",
+    "\"No risk, easy cash.\""
   ]);
   
-  setupChoice("Go full force", "Turn it down", "Half-commit");
+  setupChoice("Say no, not risking it", "Say yes", "Walk away silently");
+}
+
+function showTeacherRecommendation() {
+  displayStoryText([
+    "Khalil's teacher says she wants to recommend him",
+    "for a pre-law summer program.",
+    "He needs references, an essay, and... time."
+  ]);
+  
+  setupChoice("Go for it full force", "Turn it down", "Say yes, half-commit");
 }
 
 function showFamilyEmergency() {
   displayStoryText([
-    "One twin sick.",
-    "Midterm tomorrow."
+    "One twin has a fever.",
+    "Mom has to work.",
+    "Khalil has a midterm tomorrow."
   ]);
   
-  setupChoice("Skip midterm, stay home", "Let Kya babysit", "Call aunt");
+  setupChoice("Stay home, skip test", "Leave siblings with Kya", "Call backup");
 }
 
-function showJamalConfrontation() {
+function showInterview() {
   displayStoryText([
-    "Jamal: \"You act brand new.",
-    "You too good for us now?\""
+    "Khalil gets called in for a scholarship interview.",
+    "He's nervous.",
+    "",
+    "Question: Why do you want to be a lawyer?"
   ]);
   
-  setupChoice("\"I still ride for y'all\"", "\"I don't need this\"", "Stay silent");
+  setupChoice("Fight for people like dad", "Prove them wrong", "Want a better life");
 }
 
-function showDadCourtHearing() {
+function showJamalAgain() {
   displayStoryText([
-    "Khalil can speak on dad's behalf."
+    "Jamal pulls up again:",
+    "\"Bro, you changing. You too good for us now?\"",
+    "Khalil has to respond."
   ]);
   
-  setupChoice("Speak boldly", "Let lawyer handle it", "Freeze");
+  setupChoice("I still ride for y'all", "I don't need this", "Say nothing");
 }
 
-function showFinalDebateTournament() {
+function showCourtHearing() {
   displayStoryText([
-    "Rival mocks Khalil:",
-    "\"You're just a statistic.\""
+    "Big day. Khalil has a chance to speak for his dad.",
+    "Eyes on him.",
+    "Will he?"
   ]);
   
-  setupChoice("Use logic and stay cool", "Clap back, street-style", "Freeze");
+  setupChoice("Speak boldly", "Let lawyer handle it", "Freeze up");
+}
+
+function showFinalDebate() {
+  displayStoryText([
+    "Khalil's team makes finals.",
+    "He's up against a private school kid",
+    "who mocks his background."
+  ]);
+  
+  setupChoice("Stay cool, use logic", "Call him out", "Fumble it");
 }
 
 function showProgramResults() {
-  let totalScore = knowledge + respect + confidence + mentalStrength;
+  let totalScore = knowledge + respect + confidence;
   
-  if (totalScore >= 240) {
+  if (totalScore >= 180) {
     displayStoryText([
-      "Khalil checks his email.",
+      "The email hits.",
       "",
       "ACCEPTED!",
       "",
-      "Khalil calls his mom. She cries."
+      "Khalil got into the pre-law program!"
     ]);
-    currentQuote = "\"The future belongs to those who prepare for it today.\" — Malcolm X";
-  } else if (totalScore >= 180) {
+  } else if (totalScore >= 140) {
     displayStoryText([
-      "Khalil checks his email.",
+      "The email hits.",
       "",
       "WAITLISTED",
       "",
-      "Coach promises to call in a favor."
+      "But hope remains..."
     ]);
-    currentQuote = "\"Sometimes you gotta take the scenic route to get where you're going.\" — J. Cole";
   } else {
     displayStoryText([
-      "Khalil checks his email.",
+      "The email hits.",
       "",
       "REJECTED.",
       "",
-      "He opens journal, writes new plan."
+      "But this isn't the end of his story."
     ]);
-    currentQuote = "\"Every setback is a setup for a comeback.\" — Unknown";
   }
   
   positionButton(enterButton, width/2, height - 80);
@@ -365,46 +327,27 @@ function showOneYearLater() {
   displayStoryText([
     "ONE YEAR LATER",
     "",
-    "Khalil's grinding. College apps sent.",
-    "Job lined up. Still dreaming."
+    "Khalil's applying to college.",
+    "No longer just the busboy.",
+    "Still the big brother.",
+    "Still hungry.",
+    "Still climbing."
   ]);
   
-  currentQuote = "\"I'm not here to fit in. I'm here to break cycles.\" — Khalil";
   positionButton(enterButton, width/2, height - 80);
   enterButton.text = "Continue";
 }
 
-function showFinalEnding() {
-  let totalScore = knowledge + respect + confidence + mentalStrength;
-  
-  if (totalScore >= 240) {
-    displayStoryText([
-      "ACADEMIC VICTORY",
-      "",
-      "Khalil made it to law school.",
-      "First in his family to graduate college.",
-      "",
-      "Press R to play again and explore different paths."
-    ]);
-  } else if (totalScore >= 180) {
-    displayStoryText([
-      "REDEMPTION ARC",
-      "",
-      "Khalil found his path, his way.",
-      "Not the traditional route, but his own.",
-      "",
-      "Press R to play again and explore different paths."
-    ]);
-  } else {
-    displayStoryText([
-      "FAMILY-FIRST OUTCOME",
-      "",
-      "Khalil chose family over everything.",
-      "His siblings look up to him.",
-      "",
-      "Press R to play again and explore different paths."
-    ]);
-  }
+function showFinalMessage() {
+  displayStoryText([
+    "\"They said I wouldn't make it.\"",
+    "",
+    "\"But I'm not here to fit in.",
+    "I'm here to build something bigger.\"",
+    "",
+    "🎓 You've reached one of Khalil's endings.",
+    "Press R to play again and explore different paths."
+  ]);
 }
 
 /* UTILITY FUNCTIONS */
@@ -415,15 +358,6 @@ function displayStoryText(lines) {
   
   for (let i = 0; i < lines.length; i++) {
     text(lines[i], width/2, startY + (i * 25));
-  }
-  
-  // Display quote if there is one
-  if (currentQuote !== "") {
-    fill(255, 215, 0); // Gold color for quotes
-    textSize(14);
-    text(currentQuote, width/2, height - 200);
-    fill(255); // Reset to white
-    textSize(18);
   }
 }
 
@@ -467,227 +401,66 @@ function handleButtonClicks() {
   }
 }
 
-function getQuoteForChoice(choiceQuality) {
-  let quotes = {
-    good: [
-      "\"Reality is wrong. Dreams are for real.\" — Tupac",
-      "\"Success is my only option, failure's not.\" — Eminem", 
-      "\"The future belongs to those who prepare for it today.\" — Malcolm X",
-      "\"Champions are made when no one is watching.\" — Kobe Bryant"
-    ],
-    okay: [
-      "\"The biggest risk is not taking one.\" — Nipsey Hussle",
-      "\"If you don't stand for something, you'll fall for anything.\" — Malcolm X",
-      "\"Honesty is a very expensive gift. Don't expect it from cheap people.\" — Warren Buffett"
-    ],
-    bad: [
-      "\"More money, more problems.\" — The Notorious B.I.G.",
-      "\"Don't sacrifice what you want most for what you want now.\" — Drake",
-      "\"Sometimes you gotta take the L to feed the fam.\" — Meek Mill"
-    ]
-  };
-  
-  let selectedQuotes = quotes[choiceQuality];
-  return selectedQuotes[Math.floor(Math.random() * selectedQuotes.length)];
-}
-
 function handleChoice(choice) {
   playerChoices[screen] = choice;
-  currentQuote = ""; // Reset quote
   
   // Apply stat changes based on screen and choice
   switch(screen) {
-    case 3: // Debate Offer - just store choice, outcome handled in next screen
-      break;
-      
-    case 6: // Street Offer
-      if (choice === 'A') {
-        respect += 10; mentalStrength += 5;
-        currentQuote = "\"I'd rather lose a leg than my integrity.\" — Logic";
-      }
-      else if (choice === 'B') {
-        money += 20; respect -= 15;
-        currentQuote = "\"More money, more problems.\" — The Notorious B.I.G.";
-      }
-      else {
-        currentQuote = "\"Sometimes silence speaks louder than words.\" — Unknown";
-      }
-      break;
-      
-    case 7: // Jamal's Party
-      if (choice === 'A') {
-        knowledge += 10;
-        currentQuote = "\"Champions are made when no one is watching.\" — Kobe Bryant";
-      }
-      else if (choice === 'B') {
-        respect -= 10; knowledge -= 5;
-        currentQuote = "\"Don't sacrifice what you want most for what you want now.\" — Drake";
-      }
-      else {
-        currentQuote = "\"Honesty is a very expensive gift. Don't expect it from cheap people.\" — Warren Buffett";
-      }
-      break;
-      
-    case 9: // Debate vs Work
-      if (choice === 'A') { 
-        money += 15;
-        currentQuote = "\"Sometimes you gotta take the L to feed the fam.\" — Meek Mill";
-      }
-      else if (choice === 'B') {
-        knowledge += 15; confidence += 10;
-        currentQuote = "\"If you stay ready, you ain't gotta get ready.\" — Snoop Dogg";
-      }
-      else {
+    case 4: // Late night call
+      if (choice === 'A') { respect += 5; money += 10; }
+      else if (choice === 'B') { knowledge += 10; money -= 5; }
+      else { 
         if (random() > 0.5) { knowledge += 5; money += 5; }
-        else { knowledge -= 10; money -= 10; }
-        currentQuote = "\"You can't pour from an empty cup.\" — Unknown";
+        else { knowledge -= 5; money -= 5; }
       }
       break;
       
-    case 10: // School Stress
-      if (choice === 'A') {
-        knowledge += 15; mentalStrength -= 5;
-        currentQuote = "\"Work until your idols become your rivals.\" — Drake";
-      }
-      else if (choice === 'B') { 
-        money += 10; knowledge -= 10;
-        currentQuote = "\"This hustle don't come with a blueprint.\" — J. Cole";
-      }
-      else {
-        knowledge += 5; respect += 5;
-        currentQuote = "\"It takes a village to raise a child.\" — African Proverb";
-      }
+    case 5: // Jamal's party
+      if (choice === 'A') knowledge += 10;
+      else if (choice === 'B') respect -= 10;
       break;
       
-    case 11: // Family Homework Night
-      if (choice === 'A') {
-        respect += 15;
-        currentQuote = "\"Family over everything.\" — Lil Durk";
-      }
-      else if (choice === 'B') { 
-        knowledge += 10;
-        currentQuote = "\"Sometimes you gotta be selfish with your time.\" — Rihanna";
-      }
-      else {
-        respect += 5; knowledge += 5;
-        currentQuote = "\"Balance is not something you find, it's something you create.\" — Jana Kingsford";
-      }
+    case 7: // Missing homework
+      if (choice === 'A') { respect += 5; knowledge -= 5; }
+      else if (choice === 'C') money -= 5;
       break;
       
-    case 12: // Customer Incident
-      if (choice === 'A') {
-        respect += 15;
-        currentQuote = "\"Class is knowing what to say, when not to say it.\" — Beyoncé";
-      }
-      else if (choice === 'B') { 
-        mentalStrength += 10; money -= 5;
-        currentQuote = "\"Speak your truth, even if your voice shakes.\" — Unknown";
-      }
-      else if (choice === 'C') { 
-        confidence += 15; money -= 20;
-        currentQuote = "\"Know your worth. Then add tax.\" — Cardi B";
-      }
+    case 8: // Customer incident
+      if (choice === 'A') respect += 10;
+      else if (choice === 'B') { respect -= 5; confidence += 5; }
+      else if (choice === 'C') { money -= 10; confidence += 10; }
       break;
       
-    case 14: // Scholarship Interview
-      if (choice === 'A') {
-        if (knowledge >= 70) { confidence += 20; }
-        else { confidence -= 10; }
-        currentQuote = "\"The future belongs to those who prepare for it today.\" — Malcolm X";
-      }
-      else if (choice === 'B') {
-        mentalStrength += 10;
-        currentQuote = "\"Protect your peace like your life depends on it.\" — Zendaya";
-      }
-      else {
-        if (random() > 0.5) { confidence += 5; }
-        else { respect -= 10; }
-        currentQuote = "\"You either go all in or get out.\" — Eminem";
-      }
+    case 10: // Classmate offer
+      if (choice === 'A') respect += 10;
+      else if (choice === 'B') { money += 20; respect -= 15; }
       break;
       
-    case 15: // Family Emergency
-      if (choice === 'A') {
-        respect += 15; knowledge -= 10;
-        currentQuote = "\"Family first, always.\" — Vin Diesel";
-      }
-      else if (choice === 'B') {
-        if (random() > 0.6) { /* Kya handles it */ }
-        else { respect -= 10; }
-        currentQuote = "\"Sometimes you gotta trust the people you love.\" — Unknown";
-      }
-      else {
-        currentQuote = "\"It takes a village.\" — African Proverb";
-      }
-      break;
-      
-    case 16: // Jamal Confrontation
-      if (choice === 'A') {
-        respect += 10;
-        currentQuote = "\"Real friends understand your growth.\" — Unknown";
-      }
-      else if (choice === 'B') {
-        mentalStrength += 15;
-        currentQuote = "\"You can't grow with people who don't want to grow.\" — Unknown";
-      }
-      else {
-        currentQuote = "\"Sometimes silence is the best response.\" — Unknown";
-      }
-      break;
-      
-    case 17: // Dad's Court Hearing
-      if (choice === 'A') { 
-        respect += 20; confidence += 15;
-        currentQuote = "\"Stand up for what you believe in.\" — Unknown";
-      }
-      else if (choice === 'B') {
-        currentQuote = "\"Trust the process.\" — Joel Embiid";
-      }
-      else if (choice === 'C') { 
-        confidence -= 15;
-        currentQuote = "\"Courage isn't the absence of fear, it's acting despite it.\" — Unknown";
-      }
-      break;
-      
-    case 18: // Final Debate Tournament
-      if (choice === 'A') {
-        knowledge += 20; confidence += 15;
-        currentQuote = "\"Logic will get you from A to B. Imagination will take you everywhere.\" — Einstein";
-      }
-      else if (choice === 'B') {
-        respect += 10; knowledge -= 5;
-        currentQuote = "\"Sometimes you gotta speak their language.\" — Unknown";
-      }
-      else {
-        mentalStrength += 10;
-        currentQuote = "\"Every loss is a lesson.\" — Unknown";
-      }
+    case 15: // Court hearing
+      if (choice === 'A') { respect += 15; confidence += 10; }
+      else if (choice === 'C') { respect -= 10; }
       break;
   }
   
-  capStats();
-  clearButtons();
-  screen++;
-}
-
-function capStats() {
+  // Cap all stats between 0 and 100
   respect = Math.max(0, Math.min(100, respect));
   knowledge = Math.max(0, Math.min(100, knowledge));
   money = Math.max(0, Math.min(100, money));
   confidence = Math.max(0, Math.min(100, confidence));
-  mentalStrength = Math.max(0, Math.min(100, mentalStrength));
+  
+  clearButtons();
+  screen++;
 }
 
 function drawHUD() {
   fill(255);
   textAlign(LEFT, CENTER);
-  textSize(12);
+  textSize(14);
   
-  text(`Respect: ${respect}`, 20, 25);
-  text(`Knowledge: ${knowledge}`, 20, 40);
-  text(`Money: ${money}`, 20, 55);
-  text(`Confidence: ${confidence}`, 20, 70);
-  text(`Mental Strength: ${mentalStrength}`, 20, 85);
+  text(`Respect: ${respect}`, 20, 30);
+  text(`Knowledge: ${knowledge}`, 20, 50);
+  text(`Money: ${money}`, 20, 70);
+  text(`Confidence: ${confidence}`, 20, 90);
   
   textAlign(CENTER, CENTER);
 }
@@ -700,9 +473,7 @@ function keyPressed() {
     knowledge = 50;
     money = 50;
     confidence = 50;
-    mentalStrength = 50;
     playerChoices = {};
-    currentQuote = "";
     clearButtons();
     positionButton(enterButton, width/2, height/2 + 40);
     enterButton.text = "Begin Story";
