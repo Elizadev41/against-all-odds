@@ -3,7 +3,7 @@
 /* VARIABLES */
 let enterButton, choiceA, choiceB, choiceC;
 let screen = 0;
-let respect = 0, knowledge = 0, money = 0, confidence = 0;
+let respect = 50, knowledge = 50, money = 50, confidence = 50;
 let playerChoices = {}; // Track player decisions
 
 /* SETUP RUNS ONCE */
@@ -447,11 +447,11 @@ function handleChoice(choice) {
   // Apply stat changes based on screen and choice
   switch(screen) {
     case 4: // Late night call
-      if (choice === 'A') { respect += 5; money += 10; }
-      else if (choice === 'B') { knowledge += 10; money -= 5; }
+      if (choice === 'A') { respect += 10; money += 10; }
+      else if (choice === 'B') { knowledge += 10; money -= 10; }
       else { 
-        if (random() > 0.5) { knowledge += 5; money += 5; }
-        else { knowledge -= 5; money -= 5; }
+        if (random() > 0.5) { knowledge += 10; money += 10; }
+        else { knowledge -= 10; money -= 10; }
       }
       break;
       
@@ -461,23 +461,23 @@ function handleChoice(choice) {
       break;
       
     case 7: // Missing homework
-      if (choice === 'A') { respect += 5; knowledge -= 5; }
-      else if (choice === 'C') money -= 5;
+      if (choice === 'A') { respect += 10; knowledge -= 10; }
+      else if (choice === 'C') money -= 10;
       break;
       
     case 8: // Customer incident
       if (choice === 'A') respect += 10;
-      else if (choice === 'B') { respect -= 5; confidence += 5; }
+      else if (choice === 'B') { respect -= 10; confidence += 10; }
       else if (choice === 'C') { money -= 10; confidence += 10; }
       break;
       
     case 10: // Classmate offer
       if (choice === 'A') respect += 10;
-      else if (choice === 'B') { money += 20; respect -= 15; }
+      else if (choice === 'B') { money += 20; respect -= 10; }
       break;
       
     case 15: // Court hearing
-      if (choice === 'A') { respect += 15; confidence += 10; }
+      if (choice === 'A') { respect += 10; confidence += 10; }
       else if (choice === 'C') { respect -= 10; }
       break;
   }
@@ -509,10 +509,10 @@ function keyPressed() {
   if (key === 'R' || key === 'r') {
     // Restart game
     screen = 0;
-    respect = 0;
-    knowledge = 0;
-    money = 0;
-    confidence = 0;
+    respect = 50;
+    knowledge = 50;
+    money = 50;
+    confidence = 50;
     playerChoices = {};
     clearButtons();
     positionButton(enterButton, width/2, height/2 + 40);
