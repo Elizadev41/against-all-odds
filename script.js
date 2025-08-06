@@ -36,7 +36,7 @@ function setupButton(button, txt, w, h) {
 
 /* DRAW LOOP */
 function draw() {
-  background(20);
+  background(245, 245, 220); // cream color
   
   // Handle screen navigation
   switch(screen) {
@@ -68,11 +68,11 @@ function draw() {
 
 /* SCREEN FUNCTIONS */
 function showTitleScreen() {
-  fill(255, 215, 0);
+  fill(101, 67, 33); // dark brown
   textSize(48);
   text("AGAINST ALL ODDS", width/2, height/2 - 80);
   
-  fill(255);
+  fill(101, 67, 33); // dark brown
   textSize(18);
   text("An Interactive Story About Khalil's Journey", width/2, height/2 - 20);
   
@@ -352,7 +352,7 @@ function showFinalMessage() {
 
 /* UTILITY FUNCTIONS */
 function displayStoryText(lines) {
-  fill(255);
+  fill(101, 67, 33); // dark brown
   textSize(18);
   let startY = 80;
   
@@ -453,7 +453,7 @@ function handleChoice(choice) {
 }
 
 function drawHUD() {
-  fill(255);
+  fill(101, 67, 33); // dark brown
   textAlign(LEFT, CENTER);
   textSize(14);
   
