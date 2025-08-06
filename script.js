@@ -86,7 +86,7 @@ function showMeetKhalil() {
     "Mom's holding it down with three younger siblings:",
     "Kya (13), King and Kayson (5-year-old twins).",
     "",
-    "Khalil works nights at a local diner to help out — but his dream?",
+    "Khalil works nights at a local diner to help out  but his dream?",
     "LAW SCHOOL.",
     "People laugh when he says it, but he's not backing down."
   ]);
