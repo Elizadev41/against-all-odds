@@ -137,8 +137,16 @@ function showEnding() {
   }
   positionButton(enterButton, width / 2, height - 60);
   enterButton.text = "Restart";
-  screen = 18;
-  quoteToDisplay = "";
+  if (enterButton.mouse.presses()) {
+    screen = 0;
+    respect = 50;
+    knowledge = 50;
+    money = 50;
+    confidence = 50;
+    playerChoices = {};
+    quoteToDisplay = "";
+    clearButtons();
+  }
 }
 
 // Shared functions
