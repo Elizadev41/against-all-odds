@@ -203,20 +203,22 @@ function handleButtonClicks() {
     clearButtons();
     screen++;
   }
-  if (choiceA.mouse.presses()) handleChoice('A');
-  if (choiceB.mouse.presses()) handleChoice('B');
-  if (choiceC.mouse.presses()) handleChoice('C');
 }
 
 function positionButton(button, x, y) {
-  button.pos = { x: x, y: y };
+  button.position.x = x;
+  button.position.y = y;
 }
 
 function clearButtons() {
-  enterButton.pos = { x: -999, y: -999 };
-  choiceA.pos = { x: -999, y: -999 };
-  choiceB.pos = { x: -999, y: -999 };
-  choiceC.pos = { x: -999, y: -999 };
+  enterButton.position.x = -999;
+  enterButton.position.y = -999;
+  choiceA.position.x = -999;
+  choiceA.position.y = -999;
+  choiceB.position.x = -999;
+  choiceB.position.y = -999;
+  choiceC.position.x = -999;
+  choiceC.position.y = -999;
 }
 
 function showTitleScreen() {
