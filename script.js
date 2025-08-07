@@ -219,6 +219,43 @@ function clearButtons() {
   choiceC.pos = { x: -999, y: -999 };
 }
 
+function showTitleScreen() {
+  displayStoryText([
+    "AGAINST ALL ODDS",
+    "The Story of Khalil",
+    "A young man's journey through choices that shape his destiny."
+  ]);
+  positionButton(enterButton, width / 2, height / 2 + 40);
+  enterButton.text = "Begin Story";
+}
+
+function showIntro() {
+  displayStoryText([
+    "Meet Khalil, 17, from the block.",
+    "Dreams of being a lawyer but faces daily pressures.",
+    "Every choice matters. Every decision shapes his future.",
+    "This is his story."
+  ]);
+  positionButton(enterButton, width / 2, height - 60);
+  enterButton.text = "Start Journey";
+}
+
+function screen2() {
+  displayScreen("Monday", "Khalil's friend Jamal offers him a shortcut to quick money.", ["Say no", "Listen to the offer", "Ask for details"], [10, -10, 5], ["Stay focused on your goals. – Nipsey Hussle", "Fast money ain't always good money. – Jay-Z", "Knowledge is power. – Nas"]);
+}
+
+function screen3() {
+  displayScreen("Tuesday", "A teacher notices Khalil's potential and offers extra help.", ["Accept gratefully", "Decline politely", "Say maybe later"], [10, 0, 5], ["Education is the passport to the future. – Malcolm X", "Missed opportunities don't come back. – Drake", "Timing is everything. – Kendrick"]);
+}
+
+function screen4() {
+  displayScreen("Wednesday", "His mom asks him to help with bills instead of studying.", ["Help immediately", "Study first, help later", "Find a compromise"], [5, 10, 10], ["Family first, always. – Chance the Rapper", "Invest in your future. – Diddy", "Balance is key. – J. Cole"]);
+}
+
+function screen5() {
+  displayScreen("Thursday", "Court date for his dad's case. Khalil could speak up.", ["Speak your truth", "Stay quiet", "Support silently"], [10, 0, 5], ["Truth will set you free. – Tupac", "Sometimes silence speaks volumes. – Kendrick", "Stand by your family. – Meek Mill"]);
+}
+
 function keyPressed() {
   if (key === 'R' || key === 'r') {
     screen = 0;
