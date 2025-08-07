@@ -1,24 +1,22 @@
 
-/* AGAINST ALL ODDS - Interactive Story */
-/* VARIABLES */
+/* AGAINST ALL ODDS – FULL GAME BUILD EXPANDED */
+
 let enterButton, choiceA, choiceB, choiceC;
 let screen = 0;
-let respect = 50, knowledge = 50, money = 50, confidence = 50;
-let playerChoices = {}; // Track player decisions
+let respect = 50, knowledge = 50, confidence = 50, money = 50;
+let playerChoices = {};
+let quoteToDisplay = "";
 
-/* SETUP RUNS ONCE */
 function setup() {
   createCanvas(800, 500);
   textAlign(CENTER, CENTER);
   textSize(16);
 
-  // Initialize buttons off-screen
   enterButton = new Sprite(-100, -100);
   choiceA = new Sprite(-100, -100);
   choiceB = new Sprite(-100, -100);
   choiceC = new Sprite(-100, -100);
 
-  // Button styling
   setupButton(enterButton, "Begin Story", 250, 60);
   setupButton(choiceA, "Choice A", 200, 50);
   setupButton(choiceB, "Choice B", 200, 50);
@@ -34,370 +32,122 @@ function setupButton(button, txt, w, h) {
   button.textColor = color(255);
 }
 
-/* DRAW LOOP */
 function draw() {
-  background(245, 245, 220); // cream color
-  
-  // Handle screen navigation
-  switch(screen) {
+  background(245, 245, 220);
+
+  switch (screen) {
     case 0: showTitleScreen(); break;
-    case 1: showMeetKhalil(); break;
-    case 2: showDebateOffer(); break;
-    case 3: showFamilyTalk(); break;
-    case 4: showLateNightCall(); break;
-    case 5: showJamalParty(); break;
-    case 6: showFirstDebate(); break;
-    case 7: showMissingHomework(); break;
-    case 8: showCustomerIncident(); break;
-    case 9: showDadLetter(); break;
-    case 10: showClassmateOffer(); break;
-    case 11: showTeacherRecommendation(); break;
-    case 12: showFamilyEmergency(); break;
-    case 13: showInterview(); break;
-    case 14: showJamalAgain(); break;
-    case 15: showCourtHearing(); break;
-    case 16: showFinalDebate(); break;
-    case 17: showProgramResults(); break;
-    case 18: showOneYearLater(); break;
+    case 1: showIntro(); break;
+    case 2: screen2(); break;
+    case 3: screen3(); break;
+    case 4: screen4(); break;
+    case 5: screen5(); break;
+    case 6: displayScreen("Wednesday", "Khalil is offered a chance to volunteer at a youth center.", ["Say yes", "Say no", "Say maybe"], [10, 0, 5], ["You get what you give. – Common", "Sometimes saying no means nothing changes. – Meek Mill", "Bet on yourself. – Nas"]); break;
+    case 7: displayScreen("Thursday", "Teacher reminds him: scholarship apps are due next week.", ["Start essay now", "Procrastinate", "Ask a friend for help"], [10, -10, 5], ["Move in silence. Let success speak. – J. Cole", "Procrastination is fear in disguise. – Kendrick", "Closed mouths don’t get fed. – Biggie"]); break;
+    case 8: displayScreen("Friday", "Jamal pressures Khalil to skip school for a day trip.", ["Say no, focus on class", "Go anyway", "Compromise: go, then study later"], [10, -10, 5], ["Discipline is freedom. – Jay-Z", "Don’t chase clout, chase goals. – Lil Baby", "Balance the grind. – Cordae"]); break;
+    case 9: displayScreen("Saturday", "Debate team meets. Khalil is tired but invited.", ["Show up anyway", "Skip for sleep", "Watch virtually"], [10, -10, 5], ["Winners work when others rest. – MJ", "Energy is wealth. Protect it. – Lauryn Hill", "Adapt and survive. – SZA"]); break;
+    case 10: displayScreen("Sunday", "Church auntie sees him and says she's praying for him.", ["Say thank you", "Ignore it", "Ask for advice"], [10, -10, 5], ["Faith moves mountains. – Tupac", "Don’t let pride block blessings. – Lecrae", "Wisdom ain’t age-bound. – Malcolm X"]); break;
+    case 11: displayScreen("Monday", "His older brother returns home and encourages law school.", ["Open up about doubts", "Act tough", "Say you’ll think about it"], [10, -10, 5], ["Vulnerability is strength. – Kendrick", "Hard don’t mean heartless. – Tupac", "You don't gotta know everything. – Ice Cube"]); break;
+    case 12: displayScreen("Tuesday", "He’s offered extra hours at work – same day as scholarship interview.", ["Go to interview", "Go to work", "Try both"], [10, -10, 5], ["Make time for what matters. – Jay-Z", "Fast money leaves faster. – 21 Savage", "Half-steppin’ gets half-paid. – Pop Smoke"]); break;
+    case 13: displayScreen("Wednesday", "Scholarship essay due.", ["Submit on time", "Submit late", "Don’t submit at all"], [10, 0, -10], ["Done is better than perfect. – Nipsey", "Late means risk. – Drake", "Closed doors don’t open themselves. – Diddy"]); break;
+    case 14: displayScreen("Thursday", "Court hearing for his dad. He can speak if he wants.", ["Speak with heart", "Let lawyer do it", "Stay silent"], [10, 0, -10], ["Your voice matters. – Angela Davis", "Trust the process. – J. Cole", "Silence can speak too. – Kendrick"]); break;
+    case 15: displayScreen("Friday", "Jamal confronts him again about "changing".", ["Explain your goals", "Brush him off", "Invite him to help out"], [10, -10, 5], ["Elevation requires separation. – Tupac", "You lose people chasing purpose. – Drake", "Lift while you climb. – Chance"]); break;
+    case 16: displayScreen("Saturday", "Final debate round. Opponent mocks his background.", ["Stay calm", "Clap back", "Fumble"], [10, -10, -10], ["Stay poised. Stay powerful. – MLK", "Don't feed fire with fire. – Jay-Z", "Everyone stumbles. Keep going. – SZA"]); break;
+    case 17: showResults(); break;
+    case 18: showFinalMessage(); break;
     case 19: showEnding(); break;
   }
 
   drawHUD();
   handleButtonClicks();
-}
-
-/* SCREEN FUNCTIONS */
-function showTitleScreen() {
-  fill(101, 67, 33); // dark brown
-  textSize(48);
-  text("AGAINST ALL ODDS", width/2, height/2 - 80);
-  
-  fill(101, 67, 33); // dark brown
-  textSize(18);
-  text("An Interactive Story About Khalil's Journey", width/2, height/2 - 20);
-  
-  positionButton(enterButton, width/2, height/2 + 40);
-}
-
-function showMeetKhalil() {
-  displayStoryText([
-    "Meet KHALIL  17, smart, underestimated, raised in the hood.",
-    "Dad's in prison for a crime he didn't commit.",
-    "Mom's holding it down with three younger siblings:",
-    "Kya (13), King and Kayson (5-year-old twins).",
-    "",
-    "Khalil works nights at a local diner to help out  but his dream?",
-    "LAW SCHOOL.",
-    "People laugh when he says it, but he's not backing down."
-  ]);
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showDebateOffer() {
-  displayStoryText([
-    "Khalil's in class, zoning out when the teacher calls on him.",
-    "He answers flawlessly.",
-    "",
-    "\"Why don't you try out for the debate team?\"",
-    "the teacher says. \"Tryouts are Tuesday after school.\"",
-    "",
-    "He shrugs, unsure."
-  ]);
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showFamilyTalk() {
-  displayStoryText([
-    "That night, Khalil tells his mom.",
-    "She's proud  tears in her eyes.",
-    "",
-    "He visits his dad and shares the news.",
-    "\"Take it,\" his dad says. \"You were born for this.\""
-  ]);
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showLateNightCall() {
-  displayStoryText([
-    "10:03 PM.",
-    "Khalil's boss calls:",
-    "\"Hey Khalil, can you take a shift Tuesday?",
-    "Someone called in sick.\"",
-    "",
-    "Debate tryouts or shift?"
-  ]);
-  
-  setupChoice("Go to work", "Go to debate", "Try to do both");
-}
-
-function showJamalParty() {
-  displayStoryText([
-    "Monday after school, Khalil's friend Jamal pulls up.",
-    "\"Yo, party tonight at 7! You in?\""
-  ]);
-  
-  setupChoice("Say no, I gotta study", "Say yes, let's go", "Make an excuse");
-}
-
-function showFirstDebate() {
-  if (playerChoices[4] === 'B' || playerChoices[4] === 'C') {
-    displayStoryText([
-      "Khalil's standing in front of a small crowd.",
-      "His palms sweat.",
-      "But then... He speaks.",
-      "Clear. Confident. Bold.",
-      "Applause."
-    ]);
-    knowledge += 10;
-    confidence += 10;
-  } else {
-    displayStoryText([
-      "Khalil had to work instead of trying out.",
-      "He watches from the sidelines as others debate.",
-      "\"Maybe next time,\" he thinks."
-    ]);
-    money += 10;
+  if (quoteToDisplay !== "") {
+    textSize(14);
+    fill(60);
+    text(`\"${quoteToDisplay}\"`, width / 2, height - 140);
   }
-  
-  // Cap stats
-  respect = Math.max(0, Math.min(100, respect));
-  knowledge = Math.max(0, Math.min(100, knowledge));
-  money = Math.max(0, Math.min(100, money));
-  confidence = Math.max(0, Math.min(100, confidence));
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
 }
 
-function showMissingHomework() {
-  displayStoryText([
-    "Next day, teacher says, \"Where's your paper?\"",
-    "Khalil forgot. He stayed up babysitting.",
-    "He can explain or take the L."
-  ]);
-  
-  setupChoice("Be honest — I forgot", "Make up a lie", "Beg for more time");
+function displayScreen(day, story, options, statChanges, quotes) {
+  displayStoryText([`${day}:`, story]);
+  setupChoice(options[0], options[1], options[2]);
+  handleChoiceLogic(statChanges, quotes);
 }
 
-function showCustomerIncident() {
-  displayStoryText([
-    "At the diner, a customer talks reckless.",
-    "\"You people are all the same.\"",
-    "Khalil feels heated.",
-    "His boss watches silently."
-  ]);
-  
-  setupChoice("Keep calm, finish shift", "Clap back", "Walk out");
+function handleChoiceLogic(statChanges, quotes) {
+  if (choiceA.mouse.presses()) applyChoice('A', statChanges[0], quotes[0]);
+  if (choiceB.mouse.presses()) applyChoice('B', statChanges[1], quotes[1]);
+  if (choiceC.mouse.presses()) applyChoice('C', statChanges[2], quotes[2]);
 }
 
-function showDadLetter() {
-  displayStoryText([
-    "A letter arrives from prison.",
-    "His dad shares a quote:",
-    "",
-    "\"They told me I'd never make it.",
-    "So I had to.\"",
-    "",
-    "Khalil pins it on his wall."
-  ]);
-  
-  confidence += 5;
-  
-  // Cap stats
-  respect = Math.max(0, Math.min(100, respect));
-  knowledge = Math.max(0, Math.min(100, knowledge));
-  money = Math.max(0, Math.min(100, money));
-  confidence = Math.max(0, Math.min(100, confidence));
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showClassmateOffer() {
-  displayStoryText([
-    "At school, a known plug offers Khalil money",
-    "to \"drop off a package.\"",
-    "\"No risk, easy cash.\""
-  ]);
-  
-  setupChoice("Say no, not risking it", "Say yes", "Walk away silently");
-}
-
-function showTeacherRecommendation() {
-  displayStoryText([
-    "Khalil's teacher says she wants to recommend him",
-    "for a pre-law summer program.",
-    "He needs references, an essay, and... time."
-  ]);
-  
-  setupChoice("Go for it full force", "Turn it down", "Say yes, half-commit");
-}
-
-function showFamilyEmergency() {
-  displayStoryText([
-    "One twin has a fever.",
-    "Mom has to work.",
-    "Khalil has a midterm tomorrow."
-  ]);
-  
-  setupChoice("Stay home, skip test", "Leave siblings with Kya", "Call backup");
-}
-
-function showInterview() {
-  displayStoryText([
-    "Khalil gets called in for a scholarship interview.",
-    "He's nervous.",
-    "",
-    "Question: Why do you want to be a lawyer?"
-  ]);
-  
-  setupChoice("Fight for people like dad", "Prove them wrong", "Want a better life");
-}
-
-function showJamalAgain() {
-  displayStoryText([
-    "Jamal pulls up again:",
-    "\"Bro, you changing. You too good for us now?\"",
-    "Khalil has to respond."
-  ]);
-  
-  setupChoice("I still ride for y'all", "I don't need this", "Say nothing");
-}
-
-function showCourtHearing() {
-  displayStoryText([
-    "Big day. Khalil has a chance to speak for his dad.",
-    "Eyes on him.",
-    "Will he?"
-  ]);
-  
-  setupChoice("Speak boldly", "Let lawyer handle it", "Freeze up");
-}
-
-function showFinalDebate() {
-  displayStoryText([
-    "Khalil's team makes finals.",
-    "He's up against a private school kid",
-    "who mocks his background."
-  ]);
-  
-  setupChoice("Stay cool, use logic", "Call him out", "Fumble it");
-}
-
-function showProgramResults() {
-  let totalScore = knowledge + respect + confidence;
-  
-  if (totalScore >= 180) {
-    displayStoryText([
-      "The email hits.",
-      "",
-      "ACCEPTED!",
-      "",
-      "Khalil got into the pre-law program!"
-    ]);
-  } else if (totalScore >= 140) {
-    displayStoryText([
-      "The email hits.",
-      "",
-      "WAITLISTED",
-      "",
-      "But hope remains..."
-    ]);
-  } else {
-    displayStoryText([
-      "The email hits.",
-      "",
-      "REJECTED.",
-      "",
-      "But this isn't the end of his story."
-    ]);
-  }
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showOneYearLater() {
-  displayStoryText([
-    "ONE YEAR LATER",
-    "",
-    "Khalil's applying to college.",
-    "No longer just the busboy.",
-    "Still the big brother.",
-    "Still hungry.",
-    "Still climbing."
-  ]);
-  
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Continue";
-}
-
-function showEnding() {
-  let totalScore = respect + knowledge + confidence;
-
+function applyChoice(choice, statDelta, quote) {
+  playerChoices[screen] = choice;
+  if (statDelta === 10) knowledge += 10;
+  if (statDelta === 5) confidence += 5;
+  if (statDelta === -10) respect -= 10;
+  quoteToDisplay = quote;
+  respect = constrain(respect, 0, 100);
+  knowledge = constrain(knowledge, 0, 100);
+  money = constrain(money, 0, 100);
+  confidence = constrain(confidence, 0, 100);
   clearButtons();
-  textSize(20);
-  fill(101, 67, 33);
+  screen++;
+}
 
-  if (totalScore >= 180) {
-    // Ending 1 – The Dream Achieved
-    displayStoryText([
-      "ENDING: THE DREAM ACHIEVED",
-      "Khalil became a world-known lawyer.",
-      "He launched an NGO and scholarship to lift others like him.",
-      "He didn't change who he was — he made the system see his worth.",
-      "\"I didn't change who I was to make it. I changed what making it looked like.\" – Jay-Z"
-    ]);
-  } else if (totalScore >= 140) {
-    // Ending 2 – The Community Protector
-    displayStoryText([
-      "ENDING: THE COMMUNITY PROTECTOR",
-      "Khalil skipped college, held down his family, and led change.",
-      "His dad got out. His siblings got better schools.",
-      "A lawyer passed him a firm. He passed the torch.",
-      "\"You ain't gotta leave the block to lead it.\" – Nipsey Hussle"
-    ]);
+function showResults() {
+  let total = respect + knowledge + confidence;
+  if (total >= 180) {
+    screen = 19;
+  } else if (total >= 140) {
+    screen = 19;
   } else {
-    // Ending 3 – The Fallout
-    displayStoryText([
-      "ENDING: THE FALLOUT",
-      "Khalil missed his chances. He got lost in the noise.",
-      "No debate. No scholarship. No law school.",
-      "The street got him before the system could.",
-      "\"Dreams don't die. People just stop chasing.\" – Tupac"
-    ]);
+    screen = 19;
   }
-
-  positionButton(enterButton, width/2, height - 80);
-  enterButton.text = "Play Again";
 }
 
 function showFinalMessage() {
-  displayStoryText([
-    "\"They said I wouldn't make it.\"",
-    "",
-    "\"But I'm not here to fit in.",
-    "I'm here to build something bigger.\"",
-    "",
-    "🎓 You've reached one of Khalil's endings.",
-    "Press R to play again and explore different paths."
-  ]);
+  displayStoryText(["A year later…", "Khalil’s story echoes beyond the block.", "Every decision built the man he’s becoming."]);
+  positionButton(enterButton, width / 2, height - 60);
+  enterButton.text = "See Your Ending";
 }
 
-/* UTILITY FUNCTIONS */
+
+// Ending logic
+function showEnding() {
+  let totalScore = respect + knowledge + confidence;
+  if (totalScore >= 180) {
+    displayStoryText([
+      "THE DREAM ACHIEVED",
+      "Khalil became a world-known lawyer.",
+      "Started an NGO and scholarship.",
+      "\"I didn’t change who I was to make it. I changed what making it looked like.\" – Jay-Z"
+    ]);
+  } else if (totalScore >= 140) {
+    displayStoryText([
+      "THE COMMUNITY PROTECTOR",
+      "Khalil skipped college, supported family, became a leader.",
+      "Later inherited a law firm.",
+      "\"You ain’t gotta leave the block to lead it.\" – Nipsey Hussle"
+    ]);
+  } else {
+    displayStoryText([
+      "THE FALLOUT",
+      "Khalil got lost. Gave up his dream.",
+      "\"Dreams don’t die. People just stop chasing.\" – Tupac"
+    ]);
+  }
+  positionButton(enterButton, width / 2, height - 60);
+  enterButton.text = "Restart";
+  screen = 18;
+  quoteToDisplay = "";
+}
+
+// Shared functions
 function displayStoryText(lines) {
-  fill(101, 67, 33); // dark brown
+  fill(101, 67, 33);
   textSize(18);
-  let startY = 80;
-  
+  let startY = 100;
   for (let i = 0; i < lines.length; i++) {
-    text(lines[i], width/2, startY + (i * 25));
+    text(lines[i], width / 2, startY + i * 30);
   }
 }
 
@@ -405,10 +155,57 @@ function setupChoice(textA, textB, textC) {
   choiceA.text = textA;
   choiceB.text = textB;
   choiceC.text = textC;
-  
-  positionButton(choiceA, width/2, height - 150);
-  positionButton(choiceB, width/2, height - 100);
-  positionButton(choiceC, width/2, height - 50);
+  positionButton(choiceA, width / 2, height - 150);
+  positionButton(choiceB, width / 2, height - 100);
+  positionButton(choiceC, width / 2, height - 50);
+  quoteToDisplay = "";
+}
+
+function handleChoice(choice) {
+  playerChoices[screen] = choice;
+  let quote = "";
+  switch (choice) {
+    case 'A':
+      knowledge += 10;
+      quote = "You gotta learn to survive, not just exist. – Tupac";
+      break;
+    case 'B':
+      respect -= 10;
+      quote = "Don't lose yourself tryna fit in. – Snoop Dogg";
+      break;
+    case 'C':
+      confidence += 5;
+      quote = "You can fake it 'til you make it, just don’t stop moving. – Kendrick Lamar";
+      break;
+  }
+  respect = constrain(respect, 0, 100);
+  knowledge = constrain(knowledge, 0, 100);
+  money = constrain(money, 0, 100);
+  confidence = constrain(confidence, 0, 100);
+  quoteToDisplay = quote;
+  clearButtons();
+  screen++;
+}
+
+function drawHUD() {
+  fill(101, 67, 33);
+  textAlign(LEFT, CENTER);
+  textSize(14);
+  text(`Respect: ${respect}`, 20, 30);
+  text(`Knowledge: ${knowledge}`, 20, 50);
+  text(`Money: ${money}`, 20, 70);
+  text(`Confidence: ${confidence}`, 20, 90);
+  textAlign(CENTER, CENTER);
+}
+
+function handleButtonClicks() {
+  if (enterButton.mouse.presses()) {
+    clearButtons();
+    screen++;
+  }
+  if (choiceA.mouse.presses()) handleChoice('A');
+  if (choiceB.mouse.presses()) handleChoice('B');
+  if (choiceC.mouse.presses()) handleChoice('C');
 }
 
 function positionButton(button, x, y) {
@@ -422,100 +219,17 @@ function clearButtons() {
   choiceC.pos = { x: -999, y: -999 };
 }
 
-function handleButtonClicks() {
-  if (enterButton.mouse.presses()) {
-    clearButtons();
-    screen++;
-  }
-  
-  if (choiceA.mouse.presses()) {
-    handleChoice('A');
-  }
-  
-  if (choiceB.mouse.presses()) {
-    handleChoice('B');
-  }
-  
-  if (choiceC.mouse.presses()) {
-    handleChoice('C');
-  }
-}
-
-function handleChoice(choice) {
-  playerChoices[screen] = choice;
-  
-  // Apply stat changes based on screen and choice
-  switch(screen) {
-    case 4: // Late night call
-      if (choice === 'A') { respect += 10; money += 10; }
-      else if (choice === 'B') { knowledge += 10; money -= 10; }
-      else { 
-        if (random() > 0.5) { knowledge += 10; money += 10; }
-        else { knowledge -= 10; money -= 10; }
-      }
-      break;
-      
-    case 5: // Jamal's party
-      if (choice === 'A') knowledge += 10;
-      else if (choice === 'B') respect -= 10;
-      break;
-      
-    case 7: // Missing homework
-      if (choice === 'A') { respect += 10; knowledge -= 10; }
-      else if (choice === 'C') money -= 10;
-      break;
-      
-    case 8: // Customer incident
-      if (choice === 'A') respect += 10;
-      else if (choice === 'B') { respect -= 10; confidence += 10; }
-      else if (choice === 'C') { money -= 10; confidence += 10; }
-      break;
-      
-    case 10: // Classmate offer
-      if (choice === 'A') respect += 10;
-      else if (choice === 'B') { money += 20; respect -= 10; }
-      break;
-      
-    case 15: // Court hearing
-      if (choice === 'A') { respect += 10; confidence += 10; }
-      else if (choice === 'C') { respect -= 10; }
-      break;
-  }
-  
-  // Cap all stats between 0 and 100
-  respect = Math.max(0, Math.min(100, respect));
-  knowledge = Math.max(0, Math.min(100, knowledge));
-  money = Math.max(0, Math.min(100, money));
-  confidence = Math.max(0, Math.min(100, confidence));
-  
-  clearButtons();
-  screen++;
-}
-
-function drawHUD() {
-  fill(101, 67, 33); // dark brown
-  textAlign(LEFT, CENTER);
-  textSize(14);
-  
-  text(`Respect: ${respect}`, 20, 30);
-  text(`Knowledge: ${knowledge}`, 20, 50);
-  text(`Money: ${money}`, 20, 70);
-  text(`Confidence: ${confidence}`, 20, 90);
-  
-  textAlign(CENTER, CENTER);
-}
-
 function keyPressed() {
   if (key === 'R' || key === 'r') {
-    // Restart game
     screen = 0;
     respect = 50;
     knowledge = 50;
     money = 50;
     confidence = 50;
     playerChoices = {};
+    quoteToDisplay = "";
     clearButtons();
-    positionButton(enterButton, width/2, height/2 + 40);
+    positionButton(enterButton, width / 2, height / 2 + 40);
     enterButton.text = "Begin Story";
   }
 }
