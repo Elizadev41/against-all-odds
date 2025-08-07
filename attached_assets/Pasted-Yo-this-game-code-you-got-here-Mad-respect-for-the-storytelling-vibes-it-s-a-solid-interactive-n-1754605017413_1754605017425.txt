@@ -1,0 +1,109 @@
+Yo, this game code you got here? Mad respect for the storytelling vibes — it’s a solid interactive narrative about Khalil’s grind and choices. But I gotta be real: your code has some *major* logic overlaps and technical stuff that could mess up how players experience it. Let's break it down and make it tight AF.
+
+---
+
+### 1. **Buttons & Input Handling – The Clutch Fix Needed**
+
+* You create buttons as `new Sprite(-100, -100)` but your `positionButton` sets `.pos = {x, y}` — if you’re using p5.play, the sprite position needs to be `sprite.position.x` and `sprite.position.y`, not a custom `.pos`.
+* Also, your `handleChoiceLogic()` calls `applyChoice()` inside `draw()` when a mouse press is detected, but you also call `handleChoice()` inside `handleButtonClicks()`. This means clicks could double-trigger choices, causing your `screen` variable to jump ahead faster than intended — that’s gonna screw your flow.
+* The fix: unify your click handling in one place only. Preferably in `handleButtonClicks()` or by assigning callback functions to buttons if your framework allows it.
+
+### 2. **Stat Updates – Way Too Simple, Needs Refinement**
+
+Your current system updates stats like:
+
+```js
+if (statDelta === 10) knowledge += 10;
+if (statDelta === 5) confidence += 5;
+if (statDelta === -10) respect -= 10;
+```
+
+That’s super basic and kinda lazy because:
+
+* What if you want to adjust different stats per choice? Right now, a +10 always affects knowledge, +5 always confidence, and -10 always respect. That’s *not* scalable.
+* Solution: Pass an object with all stat changes, e.g.:
+
+```js
+let statChanges = { respect: 5, knowledge: 10, confidence: 0, money: -5 };
+applyStatChanges(statChanges);
+
+function applyStatChanges(changes) {
+  respect += changes.respect || 0;
+  knowledge += changes.knowledge || 0;
+  confidence += changes.confidence || 0;
+  money += changes.money || 0;
+  // constrain all between 0-100
+}
+```
+
+That way, your game can flexibly reflect the complexity of each choice.
+
+### 3. **Screen Flow – Overlapping Screen Numbers & Duplicated Logic**
+
+* You have cases 6 through 16 showing `displayScreen()` with day names and choices — that's cool, but you’re hardcoding all that in `draw()`’s switch statement. This feels super manual and rigid.
+* What if you want to add more days or choices? You’ll have to write a new case for every one. Not scalable.
+* Suggestion: store all day data (day, story, options, stat changes, quotes) in an array or JSON, then just iterate through it using `screen` as the index. Clean, efficient, and easy to maintain.
+
+Example:
+
+```js
+const days = [
+  { day: "Monday", story: "Jamal offers shortcut", options: [...], statChanges: [...], quotes: [...] },
+  ...
+];
+
+function draw() {
+  if(screen >= 1 && screen <= days.length) {
+    const dayData = days[screen - 1];
+    displayScreen(dayData.day, dayData.story, dayData.options, dayData.statChanges, dayData.quotes);
+  }
+  // other screens...
+}
+```
+
+### 4. **Quotes & Messaging – Pretty Solid**
+
+You got some great quotes sprinkled throughout, which adds vibe and meaning. Keep that. Just ensure they sync up cleanly with choices.
+
+### 5. **Restart Logic Needs Work**
+
+* Your `keyPressed()` function resets everything on `R`, but what about clicking the Restart button at the end?
+* Currently, you set `screen = 18` at the end, but you need to make sure that clicking the "Restart" button on screen 18 actually resets the game state back to zero.
+* You could add this to `handleButtonClicks()`:
+
+```js
+if (screen === 18 && enterButton.mouse.presses()) {
+  resetGame();
+}
+
+function resetGame() {
+  screen = 0;
+  respect = 50;
+  knowledge = 50;
+  money = 50;
+  confidence = 50;
+  playerChoices = {};
+  quoteToDisplay = "";
+  clearButtons();
+  positionButton(enterButton, width / 2, height / 2 + 40);
+  enterButton.text = "Begin Story";
+}
+```
+
+### 6. **Sprite Library Use — Are You Sure?**
+
+* Your code uses `new Sprite()` but doesn’t import or mention p5.play explicitly. Is that included?
+* If not, you gotta either add p5.play or rewrite buttons with regular p5.js rectangles and mouse detection for clicks.
+* Buttons don’t really need sprites unless you’re doing fancy animation or collision; plain shapes + `mouseIsPressed` + coordinates work fine.
+
+---
+
+## TL;DR: Fix your button positioning, clean up your click handling to avoid double triggers, rethink how you apply stat changes (make it flexible), organize your story data into arrays/objects, and add proper restart logic.
+
+Want me to help you refactor a snippet of this into a cleaner version? Or maybe even build a slicker button handler without p5.play? I got you.
+
+---
+
+Oh, also — love the story you’re telling. Khalil’s journey hits different, especially with the stats for respect, knowledge, confidence, and money. Real talk: that complexity adds replay value and actually challenges players to think, not just click random options.
+
+Keep grinding on this! You’re building more than a game — you’re creating an experience.
