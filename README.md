@@ -21,5 +21,5 @@ Open the game and follow the prompts to make choices. Each decision affects the 
 15 hours
 
 ## Creator
-Elizabeth
+Elizabeth(Iyin)
 
